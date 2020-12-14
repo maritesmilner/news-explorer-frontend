@@ -1,0 +1,141 @@
+.newscard {
+  padding-bottom: 16px;
+  margin: 0;
+}
+@media screen and (min-width: 1440px) {
+  .newscard {
+    padding-bottom: 24px;
+  }
+}
+
+.newscard__pic {
+  width: 288px;
+  height: 196px;
+  border-radius: 10px 10px 0 0;
+  object-fit: cover;
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+@media screen and (min-width: 768px) {
+  .newscard__pic {
+    width: 224px;
+    height: 150px;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .newscard__pic {
+    width: 400px;
+    height: 272px;
+  }
+}
+
+.newscard__info {
+  width: 288px;
+  background-color: #FFFFFF;
+  padding: 16px;
+  margin: 0;
+  box-sizing: border-box;
+  border-radius: 0 0 10px 10px;
+}
+@media screen and (min-width: 768px) {
+  .newscard__info {
+    width: 224px;
+    padding: 20px 24px 24px;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .newscard__info {
+    width: 400px;
+    padding: 20px 24px 24px;
+  }
+}
+
+.newscard__date {
+  color: #B6BCBF;
+  font-family: Source Sans Pro;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 24px;
+  margin: 0;
+  padding: 0;
+}
+
+.newscard__title {
+  height: 48px;
+  color: #1A1B22;
+  font-family: Roboto Slab;
+  font-weight: normal;
+  font-size: 22px;
+  line-height: 24px;
+  margin: 10px 0 0 0;
+  padding: 0;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+@media screen and (min-width: 768px) {
+  .newscard__title {
+    height: 72px;
+    margin-top: 20px;
+    -webkit-line-clamp: 3;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .newscard__title {
+    height: 60px;
+    font-size: 26px;
+    line-height: 30px;
+    margin-top: 12px;
+    -webkit-line-clamp: 2;
+  }
+}
+.newscard__snippet {
+  height: 88px;
+  font-family: Roboto;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 22px;
+  margin: 18px 0 0 0;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+}
+@media screen and (min-width: 768px) {
+  .newscard__snippet {
+    margin-top: 10px;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .newscard__snippet {
+    margin-top: 16px;
+  }
+}
+
+.newscard__source {
+  height: 20px;
+  margin: 8px 0 0 0;
+  font-family: Roboto Slab;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 20px;
+  color: #B6BCBF;
+  text-transform: uppercase;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+@media screen and (min-width: 768px) {
+  .newscard__source {
+    margin-top: 12px;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .newscard__source {
+    margin-top: 18px;
+  }
+}
+
+

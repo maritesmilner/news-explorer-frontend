@@ -1,0 +1,6 @@
+@import url('./vendor/fonts/fonts.css');
+@import url('./vendor/normalize.css');
+
+.bold-text {
+  font-weight: bold;
+}

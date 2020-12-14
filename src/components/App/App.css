@@ -1,0 +1,16 @@
+.page {
+  min-width: 300px;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', 'Roboto', 'Helvetica Neue', 'Arial', sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #000000;
+  color: #FFFFFF;
+  position: relative;
+}
+
+.content {
+  max-width: 1440px;
+  margin: 0 auto;
+}
