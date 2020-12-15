@@ -7,7 +7,7 @@
   list-style: none;
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1440px) {
   .header__menu {
     font-size: 18px;
   }
@@ -36,7 +36,7 @@
   color: #FFFFFF;
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1440px) {
   .header__menu-item_home{
     padding: 27px 0;
   }
@@ -48,7 +48,7 @@
   text-decoration: none;
   color: #FFFFFF;
 }
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1440px) {
   .header__menu-item_news{
     padding: 27px 0;
   }
@@ -70,7 +70,7 @@
   font-size: 16px;
   line-height: 24px;
 }
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1440px) {
   .header__menu-item_signin {
     width: 176px;
     height: 48px;
