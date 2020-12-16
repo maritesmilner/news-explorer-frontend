@@ -4,7 +4,6 @@ import "./NewsCard.css";
 
 export default function NewsCard({ card }) {
   const { currentUser } = React.useContext(CurrentUserContext);
-  console.log(card.pic);
   return (
     <li className="newscard">
       <img className="newscard__pic" src={card.pic} alt="article 1" />

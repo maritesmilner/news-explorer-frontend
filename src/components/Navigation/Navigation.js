@@ -23,7 +23,7 @@ function Navigation(props) {
     <nav>
       <ul className="header__menu>">
         <li style={{ display: windowSize > 768 ? 'inline-block' : 'none' }} className="header__menu-item">
-          <NavLink className={`header__menu-item_home ${menuItemPlacement}`} activeClassName="header_menu-item_selected " to="/" exact={true}>Home</NavLink>
+          <NavLink className={`header__menu-item_home ${menuItemPlacement}`} activeClassName="header_menu-item_selected " to="/" exact>Home</NavLink>
         </li>
         <li style={{ display: windowSize > 768 ? 'inline-block' : 'none' }} className="header__menu-item">
           <NavLink className={`header__menu-item_news ${menuItemPlacement}`} activeClassName="header_menu-item_selected " to="/saved-news">Saved articles</NavLink>

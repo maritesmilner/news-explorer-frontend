@@ -1,0 +1,7 @@
+.input__error {
+  position: absolute;
+  bottom: -10px;
+}
+.input__error-msg {
+  color: orange;
+}
