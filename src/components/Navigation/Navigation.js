@@ -29,12 +29,12 @@ function Navigation(props) {
           <NavLink className={`header__menu-item_news ${menuItemPlacement}`} activeClassName="header_menu-item_selected " to="/saved-news">Saved articles</NavLink>
         </li>
         <li style={{ display: currentUser ? 'block' : 'none' }} className="header__menu-item">
-          <button className="header__signout" type="button" aria-label="sign out" onClick="">
+          <button className="header__signout" type="button" aria-label="sign out" onClick={props.handleSignin}>
             {currentUser.name}
           </button>
         </li>
         <li className="header__menu-item">
-          <button className={`header__menu-item_signin ${menuItemPlacement}`} type="button" aria-label="sign in" onClick="">
+          <button className={`header__menu-item_signin ${menuItemPlacement}`} type="button" aria-label="sign in" onClick={props.handleSignin}>
             Sign in
           </button>
         </li>

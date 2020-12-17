@@ -23,6 +23,7 @@ export default function SavedNews(props) {
       title: "Everyone Needs a Special 'Sit Spot' in Nature",
       snippet: snippet1,
       source: "treehugger",
+      keyword: "nature",
     },
     {
       pic: image2,
@@ -30,6 +31,7 @@ export default function SavedNews(props) {
       title: "Nature makes you better",
       snippet: snippet2,
       source: "national geographic",
+      keyword: "nature",
     },
     {
       pic: image3,
@@ -37,6 +39,7 @@ export default function SavedNews(props) {
       title: "Nostalgic Photos of Tourists in U.S. National Parks",
       snippet: snippet3,
       source: "national geographic",
+      keyword: "yellowstone",
     },
     {
       pic: image4,
@@ -44,6 +47,7 @@ export default function SavedNews(props) {
       title: "Grand Teton Renews Historic Crest Trail",
       snippet: snippet4,
       source: "National parks traveler",
+      keyword: "parks",
     },
     {
       pic: image5,
@@ -51,6 +55,7 @@ export default function SavedNews(props) {
       title: "Scientists Don't Know Why Polaris Is So Weird",
       snippet: snippet5,
       source: "treehugger",
+      keyword: "photography",
     },
   ];
 
@@ -67,6 +72,7 @@ export default function SavedNews(props) {
             <NewsCard
               card={card}
               key={i}
+              placement="saved-articles"
             />
           ))
         }

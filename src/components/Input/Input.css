@@ -2,6 +2,23 @@
   position: absolute;
   bottom: -10px;
 }
+
 .input__error-msg {
-  color: orange;
+  width: 200px;
+  font-size: 12px;
+  line-height: 15px;
+  margin: -15px 0 13px 0;
+  color: #FF0000;
 }
+.input__error-msg:last-of-type {
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+
+@media screen and (min-width: 1024px) {
+  .input__error-msg {
+    width: 358px;
+    margin-top: -23px;
+  }
+}
+

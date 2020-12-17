@@ -1,13 +1,58 @@
 .newscard {
-  padding-bottom: 16px;
-  margin: 0;
+  position: relative;
 }
-@media screen and (min-width: 1440px) {
-  .newscard {
-    padding-bottom: 24px;
-  }
+.newscard__delete {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: #FFFFFF;
+  border: none;
+  border-radius: 8px;
+  z-index: 1;
+  fill: #B6BCBF;
+}
+.newscard__delete:hover {
+  fill: #1A1B22;
 }
 
+.newscard__bookmark {
+  margin: auto;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: #FFFFFF;
+  border: none;
+  border-radius: 8px;
+  z-index: 1;
+  stroke: #B6BCBF;
+  fill: #FFFFFF;
+}
+.newscard__bookmark:hover {
+  stroke: #1A1B22;
+}
+.newscard__bookmark_marked {
+  stroke: none;
+  fill: #2F71E5;
+}
+.newscard__keyword {
+  padding: 8px 20px;
+  margin: 0;
+  font-family: Roboto;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  text-transform: capitalize;
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: #FFFFFF;
+  border-radius: 10px;
+  z-index: 2;
+}
 .newscard__pic {
   width: 288px;
   height: 196px;
@@ -117,6 +162,7 @@
 .newscard__source {
   height: 20px;
   margin: 8px 0 0 0;
+  padding: 0;
   font-family: Roboto Slab;
   font-weight: bold;
   font-size: 16px;

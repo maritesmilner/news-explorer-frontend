@@ -169,6 +169,19 @@
 .search__submit:hover {
   background: #347EFF;
 }
+.search__submit:focus {
+  background: #2A65CC;
+}
 
+.search__submit_disabled {
+  background-color: #FFFFFF;
+  color: rgba(0, 0, 0, .2);
+  border: 1px solid rgba(0, 0, 0, .2);
+  transition: none;
+}
+.search__submit_disabled:hover {
+  cursor: default;
+  background-color: #FFFFFF;
+}
 
 
