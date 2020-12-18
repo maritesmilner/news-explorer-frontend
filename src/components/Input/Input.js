@@ -28,18 +28,18 @@ export default class Input extends React.Component {
   };
 
   render() {
-    let className = this.props.className;
-    if (this.props.error) {
-      console.log(this.state.inputErrorMessage);
-      className = `${className}_error-indicator`;
+    let error = "";
+    if (this.props.isError) {
+      error = <span className="input__error-msg">{this.state.inputErrorMessage}</span>;
     }
     return (
-      <>
+      <label className="input__label">
+        {this.props.label}
         <input
+          className={this.props.className}
           type={this.props.type}
           placeholder={this.props.placeHolder}
           name={this.props.name}
-          className={className}
           id={this.props.name}
           minLength={this.props.minLength}
           maxLength={this.props.maxLength}
@@ -47,14 +47,8 @@ export default class Input extends React.Component {
           onChange={this.validateChange}
           value={this.state.inputValue || ""}
         />
-        <span
-          className={`input__error ${this.props.isError ? "input__error-msg" : ""
-            }`}
-          id={`${this.props.name}-error`}
-        >
-          {this.props.isError && this.state.inputErrorMessage}
-        </span>
-      </>
+        {error}
+      </label>
     );
   }
 }

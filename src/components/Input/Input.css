@@ -1,24 +1,23 @@
-.input__error {
-  position: absolute;
-  bottom: -10px;
-}
 
 .input__error-msg {
-  width: 200px;
+  width: 288px;
   font-size: 12px;
   line-height: 15px;
-  margin: -15px 0 13px 0;
   color: #FF0000;
-}
-.input__error-msg:last-of-type {
-  margin-top: 5px;
-  margin-bottom: 0;
+  padding: 0;
+  margin: 3px 0;
+  display: inline-block;
+
 }
 
-@media screen and (min-width: 1024px) {
-  .input__error-msg {
-    width: 358px;
-    margin-top: -23px;
-  }
+.input__label {
+  display: block;
+  font-family: Inter;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 15px;
+  color: #2F71E5;
+  position: relative;
+  margin-top: 30px;
 }
 

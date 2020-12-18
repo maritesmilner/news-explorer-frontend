@@ -16,7 +16,6 @@
   margin-right: 0;
 }
 .header__menu-item {
-  display: inline-block;
   position: relative;
   box-sizing: border-box;
   height: 100%;
@@ -26,6 +25,11 @@
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
+}
+@media screen and (min-width: 1440px) {
+  .header__menu-item {
+    margin-right: 32px;
+  }
 }
 
 .header__menu-item_home {

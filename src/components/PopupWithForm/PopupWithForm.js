@@ -1,4 +1,5 @@
 import React from "react";
+import "./PopupWithForm.css"
 
 export default function PopupWithForm(props) {
   const [isInputError, setIsInputError] = React.useState(true);
@@ -18,43 +19,35 @@ export default function PopupWithForm(props) {
     }
   }, [props.errorFlags, children]);
 
-  let formClassName = "form";
-  let titleClassName = "form__title";
-  let saveButtonClassName = "form__save-button";
-  let hasOverlay = true;
-  let hasCloseButton = true;
-  if (props.name === "sign-in" || props.name === "sign-up") {
-    formClassName = "form_display_auth";
-    titleClassName += " form__title_type_auth";
-    saveButtonClassName += " form__save-button_type_auth";
-    hasOverlay = false;
-    hasCloseButton = false;
-  }
-
   return (
-    <section className={props.isOpen ? `${props.name}` : `${props.name} hide`}>
-      {hasOverlay && <div className="overlay"></div>}
+    <>
       <form
-        className={formClassName}
         onSubmit={props.onSubmit}
         noValidate
       >
-        <h2 className={titleClassName}>{props.title}</h2>
+        <h1 className="form__title">{props.title}</h1>
         {props.children}
         <button
           type="submit"
-          className={`${saveButtonClassName} ${isInputError ? "form__save-button_disabled" : ""
-            }`}
+          className={isInputError ? "form__submit form__submit_disabled" : "form__submit"}
           disabled={isInputError}
         >
           {props.submitButtonLabel}
         </button>
-        {hasCloseButton && <button
+        <button
           type="button"
-          className="form__close-button"
+          className="form__close"
           onClick={props.onClose}
-        ></button>}
+        >
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13.4142 12L18.7071 17.2928L17.2929 18.7071L11.2929 12.7071C10.9024 12.3165 10.9024 11.6834 11.2929 11.2928L17.2929 5.29285L18.7071 6.70706L13.4142 12Z" fill="white" />
+            <path d="M10.8787 12L5.58577 17.2928L6.99999 18.7071L13 12.7071C13.3905 12.3165 13.3905 11.6834 13 11.2928L6.99999 5.29285L5.58577 6.70706L10.8787 12Z" fill="white" />
+          </svg>
+
+        </button>
+
       </form>
-    </section>
+
+    </>
   );
 }
