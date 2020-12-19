@@ -40,7 +40,6 @@ export default class Input extends React.Component {
           type={this.props.type}
           placeholder={this.props.placeHolder}
           name={this.props.name}
-          id={this.props.name}
           minLength={this.props.minLength}
           maxLength={this.props.maxLength}
           required={this.props.isRequired}

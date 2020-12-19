@@ -1,21 +1,21 @@
-import './Signin.css';
+import './Signup.css';
 import Input from "../Input/Input";
 import PopupWithForm from "../PopupWithForm/PopupWithForm";
 
-export default function Signin(props) {
+export default function Signup(props) {
   function handleSubmit(e) {
     e.preventDefault();
-    props.onSignin();
+    props.onSignup();
   }
   return (
     <section className={props.isOpen ? "" : "hide"}>
       <div className="overlay"></div>
-      <div className="signin">
+      <div className="signup">
         <PopupWithForm
-          title="Sign in"
+          title="Sign up"
           isOpen={props.isOpen}
           onClose={props.onClose}
-          submitButtonLabel="Sign in"
+          submitButtonLabel="Sign up"
           onSubmit={handleSubmit}
           errorFlags={props.errorFlags}
         >
@@ -46,8 +46,8 @@ export default function Signin(props) {
             isError={props.errorFlags.password}
           />
         </PopupWithForm>
-        <p className="signin__text">
-          or <button type="button" className="signin__signup" onClick={props.handleSignupClick}>Sign up</button>
+        <p className="signup__text">
+          or <button type="button" className="signup__signin" onClick={props.handleSigninClick}>Sign in</button>
         </p>
       </div>
     </section>

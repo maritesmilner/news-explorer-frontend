@@ -8,6 +8,7 @@ import SearchForm from "../SearchForm/SearchForm";
 import NewsCardList from "../NewsCardList/NewsCardList";
 import About from "../About/About";
 import Signin from "../Signin/Signin";
+import Signup from "../Signup/Signup";
 import './App.css';
 
 function App() {
@@ -25,10 +26,6 @@ function App() {
     setErrorFlags({ ...errorFlags, [inputName]: isInputError });
   };
 
-  const handleSigninClick = () => {
-    setIsSigninPopupOpen(true);
-  };
-
   const closeAllPopups = () => {
     if (isSigninPopupOpen) {
       setIsSigninPopupOpen(false);
@@ -39,8 +36,13 @@ function App() {
     setErrorFlags({});
   };
 
-  //placeholder
-  const handleSignin = () => {
+  const handleSigninClick = () => {
+    closeAllPopups();
+    setIsSigninPopupOpen(true);
+  };
+  const handleSignupClick = () => {
+    closeAllPopups();
+    setIsSignupPopupOpen(true);
   };
 
   return (
@@ -69,6 +71,15 @@ function App() {
           values={values}
           errorFlags={errorFlags}
           onInputChange={handleChange}
+          handleSignupClick={handleSignupClick}
+        />
+        <Signup
+          isOpen={isSignupPopupOpen}
+          onClose={closeAllPopups}
+          values={values}
+          errorFlags={errorFlags}
+          onInputChange={handleChange}
+          handleSigninClick={handleSigninClick}
         />
         <Footer />
       </Main>

@@ -1,4 +1,4 @@
-.signin {
+.signup {
   width: 320px;
   padding: 16px;
   box-sizing: border-box;
@@ -13,12 +13,12 @@
   z-index: 3;
 }
 @media screen and (min-width: 768px) {
-  .signin {
+  .signup {
     width: 430px;
     padding: 34px 36px;
   }
 }
-.signin__text {
+.signup__text {
   width: 226px;
   margin: 16px auto 252px auto;
   font-family: Inter;
@@ -29,16 +29,12 @@
   color: #000000;
 }
 @media screen and (min-width: 768px) {
-  .signin__text {
+  .signup__text {
     margin-bottom: 28px;
   }
 }
 
-.signin__link {
-  color: #2F71E5;
-  text-decoration: none;
-}
-.signin__signup {
+.signup__signin {
   display: inline;
   color: #2F71E5;
   border: none;
@@ -46,4 +42,3 @@
   padding: 0;
   background: #FFFFFF;
 }
-
