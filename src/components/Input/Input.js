@@ -1,53 +1,49 @@
 import React from "react";
 import "./Input.css";
 
-export default class Input extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { inputValue: this.props.value };
-  }
+export default function Input(props) {
 
-  componentDidUpdate(prevProps) {
-    // Typical usage (don't forget to compare props):
-    if (this.props.value !== prevProps.value) {
-      this.setState({ ...this.state, inputValue: this.props.value });
+  const [inputName, setInputName] = React.useState();
+  const [inputValue, setInputValue] = React.useState(props.value);
+  const [isInputError, setIsInputError] = React.useState(props.isInputError);
+
+  const isInitialMount = React.useRef(true);
+  const errorMsg = React.useRef("");
+
+  React.useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+    } else {
+      props.onInputChange({ inputName, inputValue, isInputError });
     }
-  }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inputValue]);
 
-  validateChange = (e) => {
-    this.setState(
-      {
-        ...this.state,
-        inputName: e.target.name,
-        inputValue: e.target.value,
-        isInputError: !e.target.validity.valid,
-        inputErrorMessage: e.target.validationMessage,
-      },
-      () => this.props.onInputChange(this.state)
-    );
+  const validateChange = (e) => {
+    setInputName(e.target.name);
+    setInputValue(e.target.value);
+    setIsInputError(!e.target.validity.valid);
+    errorMsg.current = e.target.validationMessage;
   };
 
-  render() {
-    let error = "";
-    if (this.props.isError) {
-      error = <span className="input__error-msg">{this.state.inputErrorMessage}</span>;
-    }
-    return (
-      <label className="input__label">
-        {this.props.label}
-        <input
-          className={this.props.className}
-          type={this.props.type}
-          placeholder={this.props.placeHolder}
-          name={this.props.name}
-          minLength={this.props.minLength}
-          maxLength={this.props.maxLength}
-          required={this.props.isRequired}
-          onChange={this.validateChange}
-          value={this.state.inputValue || ""}
-        />
-        {error}
-      </label>
-    );
-  }
+
+  const errorSpan = <span className="input__error-msg">{errorMsg.current}</span>;
+
+  return (
+    <label className="input__label">
+      {props.label}
+      <input
+        className={props.className}
+        type={props.type}
+        placeholder={props.placeHolder}
+        name={props.name}
+        minLength={props.minLength}
+        maxLength={props.maxLength}
+        required={props.isRequired}
+        value={props.value || ""}
+        onChange={validateChange}
+      />
+      {props.isError && errorSpan}
+    </label>
+  );
 }

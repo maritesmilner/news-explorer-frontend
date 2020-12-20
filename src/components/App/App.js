@@ -7,8 +7,8 @@ import Footer from "../Footer/Footer";
 import SearchForm from "../SearchForm/SearchForm";
 import NewsCardList from "../NewsCardList/NewsCardList";
 import About from "../About/About";
-import Signin from "../Signin/Signin";
-import Signup from "../Signup/Signup";
+import AuthForm from "../AuthForm/AuthForm";
+import Popup from "../Popup/Popup";
 import './App.css';
 
 function App() {
@@ -18,6 +18,12 @@ function App() {
     false
   );
   const [isSignupPopupOpen, setIsSignupPopupOpen] = React.useState(
+    false
+  );
+  const [isInfoPopupOpen, setIsInfoPopupOpen] = React.useState(
+    false
+  );
+  const [isSignupSuccess, setIsSignupSuccess] = React.useState(
     false
   );
 
@@ -33,7 +39,11 @@ function App() {
     if (isSignupPopupOpen) {
       setIsSignupPopupOpen(false);
     }
+    if (isInfoPopupOpen) {
+      setIsInfoPopupOpen(false);
+    }
     setErrorFlags({});
+    setValues({});
   };
 
   const handleSigninClick = () => {
@@ -44,6 +54,15 @@ function App() {
     closeAllPopups();
     setIsSignupPopupOpen(true);
   };
+  const handleSignin = () => {
+    closeAllPopups();
+    setIsInfoPopupOpen(true);
+  }
+  const handleSignup = () => {
+    closeAllPopups();
+    setIsInfoPopupOpen(true);
+    setIsSignupSuccess(true);
+  }
 
   return (
     <div className="page">
@@ -65,21 +84,38 @@ function App() {
             <SavedNews />
           </Route>
         </Switch>
-        <Signin
+        <AuthForm
           isOpen={isSigninPopupOpen}
           onClose={closeAllPopups}
           values={values}
           errorFlags={errorFlags}
           onInputChange={handleChange}
-          handleSignupClick={handleSignupClick}
+          title="Sign in"
+          submitButtonLabel="Sign in"
+          altLink="Sign up"
+          handleAltLinkClick={handleSignupClick}
+          handleSubmit={handleSignin}
         />
-        <Signup
+        <AuthForm
           isOpen={isSignupPopupOpen}
           onClose={closeAllPopups}
           values={values}
           errorFlags={errorFlags}
           onInputChange={handleChange}
-          handleSigninClick={handleSigninClick}
+          title="Sign up"
+          submitButtonLabel="Sign up"
+          altLink="Sign in"
+          handleAltLinkClick={handleSigninClick}
+          handleSubmit={handleSignup}
+        />
+        <Popup
+          isOpen={isInfoPopupOpen}
+          onClose={closeAllPopups}
+          successMessage="Registration successfully completed!"
+          errorMessage="Oops, something went wrong! Please try again."
+          isSignupSuccess={isSignupSuccess}
+          altLink="Sign in"
+          handleAltLinkClick={handleSigninClick}
         />
         <Footer />
       </Main>
