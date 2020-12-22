@@ -1,5 +1,5 @@
 import React from "react";
-import CurrentUserContext from "../../contexts/CurrentUserContext.js";
+import SavedNewsHeader from "../SavedNewsHeader/SavedNewsHeader"
 import "./SavedNews.css";
 import NewsCard from "../NewsCard/NewsCard";
 import image1 from "../../images/image1.png";
@@ -9,7 +9,6 @@ import image4 from "../../images/image4.png";
 import image5 from "../../images/image5.png";
 
 export default function SavedNews(props) {
-  const { currentUser } = React.useContext(CurrentUserContext);
   const snippet1 = "Ever since I read Richard Louv's influential book, \"Last Child in the Woods, \" the idea of having a special \"sit spot\" has stuck with me. This advice, which Louv attributes to nature educator Jon Young, is for both adults and children to find...";
   const snippet2 = "We all know how good nature can make us feel. We have known it for millennia: the sound of the ocean, the scents of a forest, the way dappled sunlight dances through leaves.";
   const snippet3 = "Uri Løvevild Golman and Helle Løvevild Golman are National Geographic Explorers and conservation photographers who just completed a project and book they call their love letter to...";
@@ -61,11 +60,7 @@ export default function SavedNews(props) {
 
   return (
     <section id="saved-articles">
-      <div className="saved-articles__header">
-        <h1 className="saved-articles__title">Saved articles</h1>
-        <p className="saved-articles__user">{currentUser.name} Elise, you have 5 saved articles.</p>
-        <p className="saved-articles__keywords">By keywords: <span className="bold-text">Nature, Yellowstone, and 2 other</span></p>
-      </div>
+      <SavedNewsHeader />
       <ul className="saved-articles__cards">
         {
           cards.map((card, i) => (

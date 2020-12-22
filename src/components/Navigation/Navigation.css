@@ -1,17 +1,30 @@
 .navigation__menu {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  margin: 0;
-  padding: 0;
   list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 16px;
+  align-items: center;
 }
-
 @media screen and (min-width: 1440px) {
   .navigation__menu {
     font-size: 18px;
   }
 }
+.navigation__menu-col {
+  flex-direction: column;
+  position: absolute;
+  top: 56px;
+  right: 0;
+  background: #1A1B22;
+  padding: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  align-items: flex-start;
+}
+.navigation__menu-col_placement_saved-articles {
+  background: #FFFFFF;
+}
+
 .navigation__menu-item:last-child {
   margin-right: 0;
 }
@@ -20,15 +33,23 @@
   box-sizing: border-box;
   height: 100%;
   margin-right: 16px;
-  text-align: center;
   font-family: Roboto;
   font-weight: 500;
-  font-size: 16px;
-  line-height: 24px;
+  font-size: 18px;
+  line-height: 56px;
+}
+@media screen and (min-width: 768px) {
+  .navigation__menu-item {
+    font-size: 16px;
+    line-height: 24px;
+    margin-right: 32px;
+    text-align: center;
+  }
 }
 @media screen and (min-width: 1440px) {
   .navigation__menu-item {
     margin-right: 32px;
+    text-align: center;
   }
 }
 
@@ -58,8 +79,10 @@
   }
 }
 
-.navigation_menu-item_selected {
-  border-bottom: 3px solid;
+@media screen and (min-width: 768px) {
+  .navigation_menu-item_selected {
+    border-bottom: 3px solid;
+  }
 }
 
 .navigation__menu-item_signin {
@@ -74,6 +97,7 @@
   font-size: 16px;
   line-height: 24px;
 }
+
 @media screen and (min-width: 1440px) {
   .navigation__menu-item_signin {
     width: 176px;
@@ -94,14 +118,46 @@
   line-height: 24px;
   justify-content: space-evenly;
   align-items: center;
-  /* align-content: center; */
+  margin-top: 22px;
+}
+@media screen and (min-width: 768px) {
+  .navigation__menu-item_signout {
+    margin-top: 0;
+  }
 }
 @media screen and (min-width: 1440px) {
   .navigation__menu-item_signout {
     width: 112px;
     height: 48px;
+    margin-top: 0;
   }
 }
 .navigation__menu-item_placement_saved-articles {
   color: #1A1B22;
+}
+
+.navigation__burger-menu {
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: transparent;
+  fill: #FFFFFF;
+}
+.navigation__burger-menu_placement_saved-articles {
+  fill: #1A1B22;
+}
+
+.navigation__close {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  border: none;
+  padding: 0;
+  fill: #FFFFFF;
+  background: transparent;
+}
+.navigation__close_placement__saved-articles {
+  fill: #1A1B22;
 }

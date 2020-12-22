@@ -7,9 +7,13 @@ function Navigation(props) {
   //for stage-3
   // const { currentUser } = React.useContext(CurrentUserContext);
   const [windowSize, setWindowSize] = React.useState(window.innerWidth);
+  const [isBurgerMenuOpen, setIsBurgerMenuOpen] = React.useState(false);
 
   const handleResize = (e) => {
     setWindowSize(window.innerWidth);
+  };
+  const handleBurgerMenuClick = () => {
+    isBurgerMenuOpen ? setIsBurgerMenuOpen(false) : setIsBurgerMenuOpen(true);
   };
 
   React.useEffect(() => {
@@ -19,9 +23,15 @@ function Navigation(props) {
   let menuItemPlacement = "";
   let saveArticles = "";
   let button = "";
+  let burgerMenuPlacement = "";
+  let navigationMenuColPlacement = "";
+  let closeButtonPlacement = "";
   if (props.location.pathname === "/saved-news") {
     menuItemPlacement = "navigation__menu-item_placement_saved-articles";
-    saveArticles = <li style={{ display: windowSize > 768 ? 'inline-block' : 'none' }} className="navigation__menu-item">
+    navigationMenuColPlacement = "navigation__menu-col_placement_saved-articles";
+    burgerMenuPlacement = "navigation__burger-menu_placement_saved-articles";
+    closeButtonPlacement = "navigation__close_placement__saved-articles";
+    saveArticles = <li className="navigation__menu-item">
       <NavLink className={`navigation__menu-item_news ${menuItemPlacement}`} activeClassName="navigation_menu-item_selected " to="/saved-news">Saved articles</NavLink>
     </li>;
     button = <button className={`navigation__menu-item_signout ${menuItemPlacement}`} type="button" aria-label="sign out" onClick={props.handleSignoutClick}>
@@ -33,10 +43,33 @@ function Navigation(props) {
     button = <button className={`navigation__menu-item_signin ${menuItemPlacement}`} type="button" aria-label="sign in" onClick={props.handleSigninClick}>Sign in</button>
   }
 
+  let navClassName = "navigation__menu";
+  if (windowSize < 768 && isBurgerMenuOpen) {
+    navClassName += " navigation__menu-col";
+    navClassName = navClassName.concat(' ', navigationMenuColPlacement);
+  }
+
+  if (windowSize < 768 && !isBurgerMenuOpen) {
+    return (
+      <nav>
+        <ul className={navClassName}>
+          <li className="navigation__menu-item">
+            <button className={`navigation__burger-menu ${burgerMenuPlacement}`} type="button" aria-label="menu" onClick={handleBurgerMenuClick}>
+              <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <rect x="4" y="8" width="16" height="2" />
+                <rect x="4" y="14" width="16" height="2" />
+              </svg>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    );
+  }
+
   return (
     <nav>
-      <ul className="navigation__menu">
-        <li style={{ display: windowSize > 768 ? 'inline-block' : 'none' }} className="navigation__menu-item">
+      <ul className={navClassName}>
+        <li className="navigation__menu-item">
           <NavLink className={`navigation__menu-item_home ${menuItemPlacement}`} activeClassName="navigation_menu-item_selected " to="/" exact>Home</NavLink>
         </li>
         {saveArticles}
@@ -44,6 +77,18 @@ function Navigation(props) {
           {button}
         </li>
       </ul>
+      {windowSize < 768 && isBurgerMenuOpen &&
+        <button
+          type="button"
+          className={`navigation__close ${closeButtonPlacement}`}
+          onClick={handleBurgerMenuClick}
+        >
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13.4142 12L18.7071 17.2928L17.2929 18.7071L11.2929 12.7071C10.9024 12.3165 10.9024 11.6834 11.2929 11.2928L17.2929 5.29285L18.7071 6.70706L13.4142 12Z" />
+            <path d="M10.8787 12L5.58577 17.2928L6.99999 18.7071L13 12.7071C13.3905 12.3165 13.3905 11.6834 13 11.2928L6.99999 5.29285L5.58577 6.70706L10.8787 12Z" />
+          </svg>
+        </button>
+      }
     </nav>
   );
 }
