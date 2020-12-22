@@ -2,7 +2,11 @@ import './SearchForm.css';
 import Input from "../Input/Input";
 
 export default function SearchForm(props) {
-  const isInputError = props.errorFlags.name;
+  const handleSearch = (e) => {
+    e.preventDefault();
+    props.values.searchInput && props.handleSubmit();
+  }
+
   return (
     <section id="search">
       <div className="search">
@@ -17,18 +21,16 @@ export default function SearchForm(props) {
           <Input
             className="search__input"
             type="text"
-            name="search-input"
-            value={props.values.name}
+            name="searchInput"
+            value={props.values.searchInput}
             placeHolder="Enter topic"
-            isRequired={true}
             onInputChange={props.onInputChange}
-            isError={isInputError}
+            isError={props.errorFlags.searchInput}
           />
           <button
             type="submit"
-            className={`search__submit ${isInputError ? "search__submit_disabled" : ""
-              }`}
-            disabled={isInputError}
+            className="search__submit"
+            onClick={handleSearch}
           >
             Search
           </button>

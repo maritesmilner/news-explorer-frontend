@@ -1,6 +1,5 @@
 import React from "react";
 import "./WithForm.css"
-// import Input from "../Input/Input";
 import Form from "../Form/Form";
 
 export default function WithForm(WrappedComponent) {

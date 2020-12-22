@@ -36,6 +36,5 @@ export default function AuthForm(props) {
         isError={props.errorFlags.password}
       />
     </PopupWithForm>
-
   );
 }

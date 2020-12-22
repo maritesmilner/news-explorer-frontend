@@ -4,7 +4,7 @@
   height: 536px;
   margin: 0 auto;
   padding: 0;
-  background: url('https://s3-alpha-sig.figma.com/img/dac0/778e/82f1206f112335e2ee4d938ba64f02d6?Expires=1608508800&Signature=CYmNWV356b2zxC8FuYkS8wG4Hbj9EWYjqj1Y1XONMcRSb3zo1xJbIyJFZ8lMwh8uKqTrN6wWDcU7ngPP2NfqHoWtR5zHMw78EaPEdIGfw6S~hMaNMfEN7Eny5uDQMP6GcI5ld~iRmdib1wD-lXwfrLk5GoGIl-GL1XOcQwGfWkvzXGQIhglyfTqeouK5e6rxaHF7sAnytwR1u4P1XxsCLHz-b5vuRpAoSePj0-HuLXb-CdLhxm-IxCWjWLpD000ronTbunpVNOtukhNAS7ysVB4PVYRHHN8nFA4MCHsmuGK7qTKIms73Cq~KNOn~~H~-kGpnx1ZGjqzUU8VoRijqiQ__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA');
+  background-image: url('../../images/search-bg.png');
   background-size: cover;
   background-position: center;
   background-color: #000000;
@@ -17,7 +17,7 @@
   right: 0px;
   bottom: 0px;
   left: 0px;
-  background-color: rgba(0,0,0,.5);
+  background-color: rgba(0,0,0,.4);
 }
 @media screen and (min-width: 768px) {
   .search {

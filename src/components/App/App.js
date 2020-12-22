@@ -14,18 +14,12 @@ import './App.css';
 function App() {
   const [values, setValues] = React.useState({});
   const [errorFlags, setErrorFlags] = React.useState({});
-  const [isSigninPopupOpen, setIsSigninPopupOpen] = React.useState(
-    false
-  );
-  const [isSignupPopupOpen, setIsSignupPopupOpen] = React.useState(
-    false
-  );
-  const [isInfoPopupOpen, setIsInfoPopupOpen] = React.useState(
-    false
-  );
-  const [isSignupSuccess, setIsSignupSuccess] = React.useState(
-    false
-  );
+  const [isSigninPopupOpen, setIsSigninPopupOpen] = React.useState(false);
+  const [isSignupPopupOpen, setIsSignupPopupOpen] = React.useState(false);
+  const [isInfoPopupOpen, setIsInfoPopupOpen] = React.useState(false);
+  const [isSignupSuccess, setIsSignupSuccess] = React.useState(false);
+  const [isSearching, setIsSearching] = React.useState(false);
+  const [searchResultCount, setSearchResultCount] = React.useState(5);
 
   const handleChange = ({ inputName, inputValue, isInputError }) => {
     setValues({ ...values, [inputName]: inputValue });
@@ -63,6 +57,11 @@ function App() {
     setIsInfoPopupOpen(true);
     setIsSignupSuccess(true);
   }
+  const handleSearch = () => {
+    setIsSearching(true);
+    setTimeout(function () { setIsSearching(false) }, 600);
+    setSearchResultCount(0);
+  }
 
   return (
     <div className="page">
@@ -76,8 +75,12 @@ function App() {
               onInputChange={handleChange}
               errorFlags={errorFlags}
               values={values}
+              handleSubmit={handleSearch}
             />
-            <NewsCardList />
+            <NewsCardList
+              searchResultCount={searchResultCount}
+              isSearching={isSearching}
+            />
             <About />
           </Route>
           <Route path="/saved-news">
