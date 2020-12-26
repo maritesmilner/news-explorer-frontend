@@ -1,5 +1,5 @@
 
-.input__error-msg {
+.form__input-error-msg {
   width: 288px;
   font-size: 12px;
   line-height: 15px;
@@ -10,24 +10,24 @@
 
 }
 
-.input__label {
+.form__input-label {
   display: block;
-  font-family: Inter;
+  font-family: Inter, Helvetica, Arial, sans-serif;
   font-weight: normal;
   font-size: 12px;
   line-height: 15px;
   color: #2F71E5;
   margin-top: 30px;
 }
-.input__label:first-of-type {
+.form__input-label:first-of-type {
   margin-top: 0;
 }
 
-.search__input {
+.form__search-input {
   width: 100%;
   padding: 16px;
   box-sizing: border-box;
-  font-family: Roboto;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -36,27 +36,26 @@
   border-radius: 100px;
   border: 1px solid #D1D2D6;
   backdrop-filter: blur(100px);
-  outline:none;
 }
 @media screen and (min-width: 768px) {
-  .search__input {
+  .form__search-input {
     display: inline-block;
     padding: 17px 170px 17px 24px
   }
 }
 @media screen and (min-width: 1440px) {
-  .search__input {
+  .form__search-input {
     padding: 20px 180px 20px 24px
   }
 }
-.search__input::placeholder {
+.form__search-input::placeholder {
   color: #C4C4C4;
 }
 
-.auth__input {
+.form__auth-input {
   display: block;
   width: 288px;
-  font-family: Inter;
+  font-family: Inter, Helvetica, Arial, sans-serif;
   font-weight: normal;
   font-size: 14px;
   line-height: 17px;
@@ -66,7 +65,7 @@
   padding: 11px 0;
 }
 @media screen and (min-width: 768px) {
-  .auth__input {
+  .form__auth-input {
     width: 358px;
 
   }

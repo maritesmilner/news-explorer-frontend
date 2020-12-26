@@ -9,17 +9,17 @@ export default function SearchForm(props) {
 
   return (
     <section id="search">
-      <div className="search">
-        <h1 className="search__title">What's going on in the world?</h1>
-        <p className="search__subtitle">Find the latest news on any topic and save them in your personal account.</p>
+      <div className="form form__search-wrapper">
+        <h1 className="form__search-title">What's going on in the world?</h1>
+        <p className="form__search-subtitle">Find the latest news on any topic and save them in your personal account.</p>
 
         <form
-          className="search__form"
+          className="form__search"
           onSubmit={props.onSubmit}
           noValidate
         >
           <Input
-            className="search__input"
+            className="form__search-input"
             type="text"
             name="searchInput"
             value={props.values.searchInput}
@@ -29,14 +29,14 @@ export default function SearchForm(props) {
           />
           <button
             type="submit"
-            className="search__submit"
+            className="form__search-submit"
             onClick={handleSearch}
           >
             Search
           </button>
-
         </form>
       </div>
+      {props.children}
     </section>
   );
 }

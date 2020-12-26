@@ -11,14 +11,12 @@
   .about {
     flex-direction: row;
     padding: 61px 40px;
-    /* margin: 0 auto; */
   }
 }
 @media screen and (min-width: 1440px) {
   .about {
     flex-direction: row;
     padding: 80px 104px;
-    /* margin: 0 auto; */
   }
 }
 
@@ -61,7 +59,7 @@
 
 .about__title {
   margin-top: 24px;
-  font-family: Roboto Slab;
+  font-family: Roboto Slab, Helvetica, Arial, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 30px;
@@ -82,7 +80,7 @@
 
 .about__description {
   margin-top: 16px;
-  font-family: Roboto;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 18px;

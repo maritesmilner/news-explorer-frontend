@@ -8,7 +8,7 @@
 }
 .not-found__title {
   width: 356px;
-  font-family: Roboto Slab;
+  font-family: Roboto Slab, Helvetica, Arial, sans-serif;
   font-weight: normal;
   font-size: 26px;
   line-height: 30px;
@@ -17,7 +17,7 @@
 }
 .not-found__text {
   width: 356px;
-  font-family: Roboto;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
   font-weight: normal;
   font-size: 18px;
   line-height: 24px;

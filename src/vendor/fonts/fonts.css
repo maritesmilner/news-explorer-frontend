@@ -4,6 +4,7 @@
   font-weight: normal;
   src: url('./inter-400-regular.woff') format('woff'),
        url('./inter-400-regular.woff2') format('woff2');
+  font-display: swap;
 }
 
 @font-face {
@@ -12,6 +13,7 @@
   font-weight: 900;
   src: url('./roboto-900.woff') format('woff'),
        url('./roboto-900.woff2') format('woff2');
+  font-display: swap;
 }
 
 @font-face {
@@ -20,6 +22,7 @@
   font-weight: 500;
   src: url('./roboto-500.woff') format('woff'),
        url('./roboto-500.woff2') format('woff2');
+  font-display: swap;
 }
 
 @font-face {
@@ -28,6 +31,7 @@
   font-weight: normal;
   src: url('./roboto-400-regular.woff') format('woff'),
        url('./roboto-400-regular.woff2') format('woff2');
+  font-display: swap;
 }
 
 @font-face {
@@ -36,6 +40,7 @@
   font-weight: normal;
   src: url('./roboto-slab-400-regular.woff') format('woff'),
        url('./roboto-slab-400-regular.woff2') format('woff2');
+  font-display: swap;
 }
 
 @font-face {
@@ -44,6 +49,7 @@
   font-weight: bold;
   src: url('./roboto-slab-700.woff') format('woff'),
        url('./roboto-slab-700.woff2') format('woff2');
+  font-display: swap;
 }
 
 @font-face {
@@ -51,6 +57,7 @@
   font-style: normal;
   font-weight: normal;
   src: url('./sourcesanspro-regular.woff') format('woff');
+  font-display: swap;
 }
 
 

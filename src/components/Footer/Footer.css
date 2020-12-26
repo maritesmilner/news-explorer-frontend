@@ -23,7 +23,7 @@
 
 .footer__copyright {
   width: 288px;
-  font-family: Roboto;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
   font-weight: normal;
   font-size: 16px;
   line-height: 22px;
@@ -52,7 +52,7 @@
   padding: 0;
   list-style: none;
   color: #1A1B22;
-  font-family: Roboto;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
@@ -125,4 +125,5 @@
   margin: 0;
   padding: 0;
   background-color: transparent;
+  cursor: pointer;
 }

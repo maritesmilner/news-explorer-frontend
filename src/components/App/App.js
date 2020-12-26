@@ -19,7 +19,7 @@ function App() {
   const [isInfoPopupOpen, setIsInfoPopupOpen] = React.useState(false);
   const [isSignupSuccess, setIsSignupSuccess] = React.useState(false);
   const [isSearching, setIsSearching] = React.useState(false);
-  const [searchResultCount, setSearchResultCount] = React.useState(5);
+  const [resultCount, setResultCount] = React.useState(5);
 
   const handleChange = ({ inputName, inputValue, isInputError }) => {
     setValues({ ...values, [inputName]: inputValue });
@@ -50,7 +50,6 @@ function App() {
   };
   const handleSignin = () => {
     closeAllPopups();
-    setIsInfoPopupOpen(true);
   }
   const handleSignup = () => {
     closeAllPopups();
@@ -60,7 +59,7 @@ function App() {
   const handleSearch = () => {
     setIsSearching(true);
     setTimeout(function () { setIsSearching(false) }, 600);
-    setSearchResultCount(0);
+    setResultCount(0);
   }
 
   return (
@@ -76,11 +75,14 @@ function App() {
               errorFlags={errorFlags}
               values={values}
               handleSubmit={handleSearch}
-            />
-            <NewsCardList
-              searchResultCount={searchResultCount}
-              isSearching={isSearching}
-            />
+            >
+              <NewsCardList
+                title="Search results"
+                resultCount={resultCount}
+                isSearching={isSearching}
+                displayCount="3"
+              />
+            </SearchForm>
             <About />
           </Route>
           <Route path="/saved-news">

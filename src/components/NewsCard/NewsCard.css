@@ -1,47 +1,86 @@
 .newscard {
   position: relative;
 }
-.newscard__delete {
-  width: 40px;
-  height: 40px;
+.newscard__button {
   position: absolute;
   top: 16px;
   right: 16px;
+  display: flex;
+  flex-direction: row-reverse;
+}
+@media screen and (min-width: 768px) {
+  .newscard__button {
+    top: 8px;
+    right: 8px;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .newscard__button {
+    top: 24px;
+    right: 24px;
+  }
+}
+.newscard__delete {
+  width: 40px;
+  height: 40px;
   background: #FFFFFF;
   border: none;
   border-radius: 8px;
   z-index: 1;
   fill: #B6BCBF;
+  cursor: pointer;
 }
 .newscard__delete:hover {
   fill: #1A1B22;
+}
+.newscard__delete:hover ~ .newscard__tooltip {
+  display: block;
 }
 
 .newscard__bookmark {
   margin: auto;
   width: 40px;
   height: 40px;
-  position: absolute;
-  top: 16px;
-  right: 16px;
   background: #FFFFFF;
   border: none;
   border-radius: 8px;
   z-index: 1;
   stroke: #B6BCBF;
   fill: #FFFFFF;
+  margin: 0;
+  cursor: pointer;
 }
 .newscard__bookmark:hover {
   stroke: #1A1B22;
+}
+.newscard__bookmark:hover ~ .newscard__tooltip {
+  display: block;
 }
 .newscard__bookmark_marked {
   stroke: none;
   fill: #2F71E5;
 }
+.newscard__tooltip {
+  height: 40px;
+  padding: 11px 20px;
+  box-sizing: border-box;
+  margin: 0 5px 0 0;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+  text-align: center;
+  border-radius: 10px;
+  background: #FFFFFF;
+  box-shadow: 0px 10px 22px rgba(59, 74, 116, 0.1);
+  border-radius: 10px;
+  display: none;
+  z-index: 4;
+}
 .newscard__keyword {
   padding: 8px 20px;
   margin: 0;
-  font-family: Roboto;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
   font-weight: 500;
   font-size: 14px;
   line-height: 24px;
@@ -53,30 +92,29 @@
   border-radius: 10px;
   z-index: 2;
 }
+@media screen and (min-width: 768px) {
+  .newscard__keyword {
+    top: 8px;
+    left: 8px;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .newscard__keyword {
+    top: 24px;
+    left: 24px;
+  }
+}
 .newscard__pic {
-  width: 288px;
-  height: 196px;
+  width: 100%;
   border-radius: 10px 10px 0 0;
   object-fit: cover;
   margin: 0;
   padding: 0;
   display: block;
 }
-@media screen and (min-width: 768px) {
-  .newscard__pic {
-    width: 224px;
-    height: 150px;
-  }
-}
-@media screen and (min-width: 1440px) {
-  .newscard__pic {
-    width: 400px;
-    height: 272px;
-  }
-}
 
 .newscard__info {
-  width: 288px;
+  width: 100%;
   background-color: #FFFFFF;
   padding: 16px;
   margin: 0;
@@ -85,20 +123,18 @@
 }
 @media screen and (min-width: 768px) {
   .newscard__info {
-    width: 224px;
     padding: 20px 24px 24px;
   }
 }
 @media screen and (min-width: 1440px) {
   .newscard__info {
-    width: 400px;
     padding: 20px 24px 24px;
   }
 }
 
 .newscard__date {
   color: #B6BCBF;
-  font-family: Source Sans Pro;
+  font-family: Source Sans Pro, Helvetica, Arial, sans-serif;
   font-weight: normal;
   font-size: 18px;
   line-height: 24px;
@@ -109,7 +145,7 @@
 .newscard__title {
   height: 48px;
   color: #1A1B22;
-  font-family: Roboto Slab;
+  font-family: Roboto Slab, Helvetica, Arial, sans-serif;
   font-weight: normal;
   font-size: 22px;
   line-height: 24px;
@@ -138,7 +174,7 @@
 }
 .newscard__snippet {
   height: 88px;
-  font-family: Roboto;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
   font-weight: normal;
   font-size: 16px;
   line-height: 22px;
@@ -163,7 +199,7 @@
   height: 20px;
   margin: 8px 0 0 0;
   padding: 0;
-  font-family: Roboto Slab;
+  font-family: Roboto Slab, Helvetica, Arial, sans-serif;
   font-weight: bold;
   font-size: 16px;
   line-height: 20px;

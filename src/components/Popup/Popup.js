@@ -12,12 +12,12 @@ export default function Popup(props) {
   return (
     <section className={props.isOpen ? "" : "hide"}>
       <div className="overlay"></div>
-      <div className="popup">
-        {message ? <p className="popup__message">{message}</p> : ""}
+      <div className="form popup">
+        {message ? <p className="form popup__message">{message}</p> : ""}
         {props.children}
         <button
           type="button"
-          className="popup__close"
+          className="form popup__close"
           onClick={props.onClose}
         >
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -26,7 +26,7 @@ export default function Popup(props) {
           </svg>
         </button>
         {props.isSignupSuccess &&
-          <button type="button" className="popup__footer-button" onClick={props.handleAltLinkClick}>{props.altLink}</button>}
+          <button type="button" className="form popup__footer-button" onClick={props.handleAltLinkClick}>{props.altLink}</button>}
       </div>
     </section>
   );

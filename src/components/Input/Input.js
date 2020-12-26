@@ -27,10 +27,10 @@ export default function Input(props) {
   };
 
 
-  const errorSpan = <span className="input__error-msg">{errorMsg.current}</span>;
+  const errorSpan = <span className="form__input-error-msg">{errorMsg.current}</span>;
 
   return (
-    <label className="input__label">
+    <label className="form__input-label">
       {props.label}
       <input
         className={props.className}

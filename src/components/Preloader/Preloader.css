@@ -9,7 +9,7 @@
 .preloader__text {
   display: block;
   width: 280px;
-  font-family: Roboto;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
   font-weight: normal;
   font-size: 18px;
   line-height: 24px;

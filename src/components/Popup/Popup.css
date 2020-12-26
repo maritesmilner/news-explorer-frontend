@@ -36,17 +36,17 @@
     height: 40px;
     top: -46px;
     right: -46px;
+    cursor: pointer;
   }
 }
 .popup__close:hover {
-  cursor: pointer;
   opacity: .6;
 }
 
 .popup__footer {
   width: 226px;
   margin: 16px auto 252px auto;
-  font-family: Inter;
+  font-family: Inter, Helvetica, Arial, sans-serif;
   font-weight: normal;
   font-size: 14px;
   line-height: 17px;
@@ -61,22 +61,22 @@
 .popup__footer-button{
   width: 288px;
   margin: 16px auto 252px auto;
-  font-family: Inter;
+  font-family: Inter, Helvetica, Arial, sans-serif;
   font-weight: normal;
   font-size: 14px;
   line-height: 17px;
   text-align: left;
-
   display: inline;
   color: #2F71E5;
   border: none;
   margin: 0;
   padding: 0;
   background: #FFFFFF;
+  cursor: pointer;
 }
 .popup__message {
   width: 315px;
-  font-family: Roboto;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
   font-weight: 900;
   font-size: 24px;
   line-height: 28px;

@@ -10,7 +10,7 @@ export default function AuthForm(props) {
   return (
     <PopupWithForm {...props}>
       <Input
-        className="auth__input"
+        className="form__auth-input"
         type="email"
         name="email"
         label="Email"
@@ -23,7 +23,7 @@ export default function AuthForm(props) {
         isError={props.errorFlags.email}
       />
       <Input
-        className="auth__input"
+        className="form__auth-input"
         type="password"
         name="password"
         label="Password"

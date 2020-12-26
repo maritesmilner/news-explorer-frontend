@@ -1,6 +1,6 @@
 .form__title {
   width: 158px;
-  font-family: Roboto;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
   font-weight: 900;
   font-size: 24px;
   line-height: 28px;
@@ -21,7 +21,7 @@
   margin: 39px auto 0 auto;
   border: none;
   color: #FFFFFF;
-  font-family: Roboto;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
   font-weight: 500;
   font-size: 18px;
   line-height: 24px;
@@ -40,7 +40,7 @@
 .form__footer {
   width: 226px;
   margin: 16px auto 252px auto;
-  font-family: Inter;
+  font-family: Inter, Helvetica, Arial, sans-serif;
   font-weight: normal;
   font-size: 14px;
   line-height: 17px;
@@ -60,5 +60,6 @@
   margin: 0;
   padding: 0;
   background: #FFFFFF;
+  cursor: pointer;
 }
 

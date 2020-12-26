@@ -27,7 +27,7 @@ export default function Form(props) {
 
   return (
     <>
-      <form
+      <form className="form"
         onSubmit={handleSubmit}
         noValidate
       >
@@ -44,7 +44,7 @@ export default function Form(props) {
       </form>
       <p className="form__footer">
         or <button type="button" className="form__footer-button" onClick={props.handleAltLinkClick}>{props.altLink}</button>
-      </p>;
+      </p>
     </>
   );
 }
