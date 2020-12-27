@@ -17,7 +17,6 @@ export default function AuthForm(props) {
         value={props.values.email}
         placeHolder="Enter email"
         minLength="2"
-        maxLength="40"
         isRequired={true}
         onInputChange={props.onInputChange}
         isError={props.errorFlags.email}
@@ -35,6 +34,19 @@ export default function AuthForm(props) {
         onInputChange={props.onInputChange}
         isError={props.errorFlags.password}
       />
+      {props.isSignup &&
+        <Input
+          className="form__auth-input"
+          type="text"
+          name="username"
+          label="Username"
+          value={props.values.username}
+          placeHolder="Enter your username"
+          isRequired={true}
+          onInputChange={props.onInputChange}
+          isError={props.errorFlags.username}
+        />
+      }
     </PopupWithForm>
   );
 }

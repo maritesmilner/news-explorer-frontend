@@ -112,6 +112,7 @@ function App() {
           altLink="Sign in"
           handleAltLinkClick={handleSigninClick}
           handleSubmit={handleSignup}
+          isSignup={true}
         />
         <Popup
           isOpen={isInfoPopupOpen}
