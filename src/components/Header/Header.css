@@ -1,5 +1,4 @@
 .header {
-  width: 100%;
   max-width: 1440px;
   height: 56px;
   box-sizing: border-box;
@@ -10,11 +9,10 @@
   position: absolute;
   left: 0;
   right: 0;
-  margin: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 1;
+  z-index: 3;
 }
 @media screen and (min-width: 768px) {
   .header {
@@ -22,7 +20,7 @@
     padding: 0 40px;
   }
 }
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1440px) {
   .header {
     height: 80px;
     padding: 0 104px;
@@ -46,50 +44,4 @@
 .header__logo_placement_saved-articles {
   color: #1A1B22;
 }
-
-.header__logout {
-  border: none;
-  background-color: transparent;
-  color: #A9A9A9;
-  padding-right: 27px;
-}
-.header__logout:hover {
-  cursor: pointer;
-  opacity: .6;
-}
-@media screen and (min-width: 1024px) {
-  .header__logout {
-    padding-right: 0;
-  }
-}
-
-.header__burger-menu {
-  display: flex;
-  flex-direction: column;
-  margin-right: 44px;
-  border: none;
-  background-color: transparent;
-}
-.header__burger-menu:hover {
-  cursor: pointer;
-  opacity: .6;
-}
-.header__burger-menu > * {
-  margin-bottom: 4px;
-}
-.header__burger-menu >  :last-child {
-  margin-bottom: 0;
-}
-
-.header__close-button  {
-  margin-right: 44px;
-  border: none;
-  background-color: transparent;
-}
-.header__close-button :hover {
-  cursor: pointer;
-  opacity: .6;
-}
-
-
 

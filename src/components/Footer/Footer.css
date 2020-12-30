@@ -1,0 +1,129 @@
+.footer {
+  width: 100%;
+  background-color: #FFFFFF;
+  padding: 20px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  flex-direction: column-reverse;
+}
+@media screen and (min-width: 768px) {
+  .footer {
+    flex-direction: row;
+    padding: 24px 40px;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .footer {
+    flex-direction: row;
+    padding: 32px 104px;
+  }
+}
+
+.footer__copyright {
+  width: 288px;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 22px;
+  color: #B6BCBF;
+}
+@media screen and (min-width: 768px) {
+  .footer__copyright {
+    width: 300px;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .footer__copyright {
+    width: 433px;
+  }
+}
+
+.footer__menu {
+  display: flex;
+  flex-direction: row;
+}
+
+.footer__links {
+  display: flex;
+  align-items: left;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: #1A1B22;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 48px;
+  flex-direction: column;
+}
+@media screen and (min-width: 768px) {
+  .footer__links {
+    line-height: 24px;
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.footer__link {
+  display: inline-block;
+  color: #1A1B22;
+  text-decoration: none;
+  text-align: left;
+}
+@media screen and (min-width: 768px) {
+  .footer__link  {
+    text-align: center;
+  }
+}
+.footer__link_home{
+  width: 200px;
+}
+@media screen and (min-width: 768px) {
+  .footer__link_home  {
+    width: 88px;
+  }
+}
+.footer__link_practicum {
+  width: 200px;
+}
+@media screen and (min-width: 768px) {
+  .footer__link_practicum  {
+    width: 176px;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .footer__link_practicum  {
+    width: 192px;
+  }
+}
+
+.footer__social {
+  list-style: none;
+  width: 68px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-left: 18px;
+  padding: 0;
+}
+@media screen and (min-width: 768px) {
+  .footer__social  {
+    margin-left: 26px;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .footer__social  {
+    margin-left: 42px;
+  }
+}
+.footer__social-button {
+  width: 20px;
+  border: none;
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  cursor: pointer;
+}

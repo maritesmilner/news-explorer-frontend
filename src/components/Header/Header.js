@@ -14,7 +14,9 @@ function Header(props) {
   return (
     <header className={`header ${headerPlacement}`}>
       <p className={`header__logo ${logoPlacement}`}>NewsExplorer</p>
-      <Navigation />
+      <Navigation
+        handleSigninClick={props.handleSigninClick}
+      />
     </header>
   );
 }

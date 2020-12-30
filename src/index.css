@@ -4,3 +4,16 @@
 .bold-text {
   font-weight: bold;
 }
+.hide {
+  display: none;
+}
+.overlay {
+  width: 100vw;
+  height: 100vh;
+  background-color: #000000;
+  opacity: .5;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
