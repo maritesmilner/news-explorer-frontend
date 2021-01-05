@@ -13,6 +13,9 @@ export default function WithForm(WrappedComponent) {
         altLink={props.altLink}
         handleAltLinkClick={props.handleAltLinkClick}
         handleSubmit={props.handleSubmit}
+        formClassName={props.formClassName}
+        submitButtonClassName={props.submitButtonClassName}
+        isSubmitButtonEnabled={props.isSubmitButtonEnabled}
       >
         {props.children}
       </Form>

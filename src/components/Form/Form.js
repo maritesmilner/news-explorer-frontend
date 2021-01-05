@@ -6,6 +6,10 @@ export default function Form(props) {
   const children = props.children;
 
   React.useEffect(() => {
+    if (props.isSubmitButtonEnabled) {
+      setIsInputError(false);
+      return;
+    }
     if (props.errorFlags && Object.keys(props.errorFlags).length > 0) {
       const flagsArr = Object.keys(props.errorFlags);
       const hasEmpty = React.Children.toArray(children).some((child) =>
@@ -17,7 +21,7 @@ export default function Form(props) {
     } else {
       setIsInputError(true);
     }
-  }, [props.errorFlags, children]);
+  }, [props.errorFlags, children, props.isSubmitButtonEnabled]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -27,7 +31,7 @@ export default function Form(props) {
 
   return (
     <>
-      <form className="form"
+      <form className={`form ${props.formClassName}`}
         onSubmit={handleSubmit}
         noValidate
       >
@@ -35,16 +39,18 @@ export default function Form(props) {
         {props.children}
         <button
           type="submit"
-          className={isInputError ? "form__submit form__submit_disabled" : "form__submit"}
+          className={isInputError ? `${props.submitButtonClassName} form__submit_disabled` : props.submitButtonClassName}
           disabled={isInputError}
           onClick={handleSubmit}
         >
           {props.submitButtonLabel}
         </button>
       </form>
-      <p className="form__footer">
-        or <button type="button" className="form__footer-button" onClick={props.handleAltLinkClick}>{props.altLink}</button>
-      </p>
+      {props.formClassName === "form__search" ? "" :
+        <p className="form__footer">
+          or <button type="button" className="form__footer-button" onClick={props.handleAltLinkClick}>{props.altLink}</button>
+        </p>
+      }
     </>
   );
 }

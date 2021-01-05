@@ -29,12 +29,12 @@ export default function NewsCard({ card, handleDelete, placement, handleBookmark
         <p className="newscard__tooltip">{toolTipText}</p>
       </div>
 
-      <img className="newscard__pic" src={card.pic} alt="article 1" />
+      <img className="newscard__pic" src={card.urlToImage} alt="article 1" />
       <div className="newscard__info">
-        <p className="newscard__date">{card.date}</p>
+        <p className="newscard__date">{card.publishedAt}</p>
         <h2 className="newscard__title">{card.title}</h2>
-        <p className="newscard__snippet">{card.snippet}</p>
-        <h3 className="newscard__source">{card.source}</h3>
+        <p className="newscard__snippet">{card.description}</p>
+        <h3 className="newscard__source">{card.source.name}</h3>
       </div>
     </li>
   );
