@@ -38,13 +38,13 @@ export default function AuthForm(props) {
         <Input
           className="form__auth-input"
           type="text"
-          name="username"
+          name="name"
           label="Username"
-          value={props.values.username}
+          value={props.values.name}
           placeHolder="Enter your username"
           isRequired={true}
           onInputChange={props.onInputChange}
-          isError={props.errorFlags.username}
+          isError={props.errorFlags.name}
         />
       }
     </PopupWithForm>

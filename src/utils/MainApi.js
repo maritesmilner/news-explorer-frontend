@@ -4,30 +4,39 @@ class MainApi {
     this._options = options;
   }
 
-  _getDataPromise(entity) {
-    return fetch(`${this._baseUrl}/${entity}`, this._options).then((res) => {
+  _getDataPromise(endpoint) {
+    return fetch(`${this._baseUrl}/${endpoint}`, this._options).then((res) => {
       return res.ok ? res.json() : Promise.reject(`Error: ${res.statusText}`);
     });
   }
 
-  signup(email, password) {
+  authorize(token) {
+    const { body, ...rest } = this._options
+    rest.method = "GET";
+    rest.headers.authorization = `Bearer ${token}`;
+    this._options = rest;
+
+    return this._getDataPromise("users/me");
+  }
+
+  signup({ email, password, name }) {
     this._options.method = "POST";
     this._options.body = JSON.stringify({
-      password: password,
-      email: email,
+      email,
+      password,
+      name,
     });
     return this._getDataPromise("signup");
   }
 
-  signin(email, password) {
+  signin({ email, password }) {
     this._options.method = "POST";
     this._options.body = JSON.stringify({
-      password: password,
-      email: email,
+      email,
+      password
     });
-    return fetch(`${this._baseUrl}/signin`, this._options).then((res) => {
-      return res.ok ? res : Promise.reject(`Error: ${res.statusText}`);
-    });
+    return this._getDataPromise("signin");
+
   }
 
   signout() {
@@ -35,12 +44,6 @@ class MainApi {
     return fetch(`${this._baseUrl}/signout`, this._options).then((res) => {
       return res.ok ? res : Promise.reject(`Error: ${res.statusText}`);
     });
-  }
-
-  getUserInfo() {
-    this._options.method = "GET";
-    delete this._options.body;
-    return this._getDataPromise('users/me');
   }
 
   updateUserInfo(user) {
@@ -90,9 +93,10 @@ class MainApi {
   }
 }
 
-export const mainApi = new MainApi("https://www.api.wizardry.students.nomoreparties.site", {
+const mainApi = new MainApi("https://newspin.students.nomoreparties.site/api", {
   headers: {
     "Content-Type": "application/json",
   },
-  credentials: "include",
 });
+
+export default mainApi;

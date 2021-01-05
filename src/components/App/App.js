@@ -3,6 +3,7 @@ import React from "react";
 import { Route, Switch, withRouter, Redirect } from "react-router-dom";
 import CurrentUserContext from "../../contexts/CurrentUserContext.js";
 import newsApi from "../../utils/NewsApi";
+import mainApi from "../../utils/MainApi";
 import Main from "../Main/Main";
 import SavedNews from "../SavedNews/SavedNews";
 import Header from "../Header/Header";
@@ -23,7 +24,7 @@ function App(props) {
   const [isSignupPopupOpen, setIsSignupPopupOpen] = React.useState(false);
   const [isInfoPopupOpen, setIsInfoPopupOpen] = React.useState(false);
   const [isSignupSuccess, setIsSignupSuccess] = React.useState(false);
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [isSignedIn, setIsSignedIn] = React.useState(false);
   const [isSearching, setIsSearching] = React.useState(false);
   const [resultCount, setResultCount] = React.useState();
   const [isVisible, setIsVisible] = React.useState(false);
@@ -31,6 +32,30 @@ function App(props) {
   const [isApiError, setIsApiError] = React.useState(false);
   const initialDisplayCount = React.useRef(3);
   const [displayCount, setDisplayCount] = React.useState(initialDisplayCount.current);
+  // const isSignedIn = React.useRef(false);
+
+  const authorize = () => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      // we'll verify the token
+      mainApi.authorize(token)
+        .then((res) => {
+          console.log(res);
+          setCurrentUser(res);
+          setIsSignedIn(true);
+          props.history.push(props.location.pathname);
+        })
+        .catch((err) => {
+          console.log(err);
+          setIsInfoPopupOpen(true);
+        });
+    }
+  };
+
+  React.useEffect(() => {
+    !isSignedIn && authorize();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSignedIn]);
 
   const handleChange = ({ inputName, inputValue, isInputError }) => {
     setValues({ ...values, [inputName]: inputValue });
@@ -59,14 +84,43 @@ function App(props) {
     closeAllPopups();
     setIsSignupPopupOpen(true);
   };
+
   const handleSignin = () => {
     closeAllPopups();
-  }
+    mainApi.signin({ email: values.email, password: values.password })
+      .then((res) => {
+        if (res.token) {
+          localStorage.setItem("token", res.token);
+          authorize();
+        } else {
+          setIsInfoPopupOpen(true);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsInfoPopupOpen(true);
+      });
+  };
+
   const handleSignup = () => {
     closeAllPopups();
-    setIsInfoPopupOpen(true);
-    setIsSignupSuccess(true);
-  }
+    mainApi.signup({ email: values.email, password: values.password, name: values.name })
+      .then((res) => {
+        setIsInfoPopupOpen(true);
+        setIsSignupSuccess(true);
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsInfoPopupOpen(true);
+      });
+  };
+
+  const handleSignout = () => {
+    localStorage.removeItem('token');
+    props.history.push('/');
+  };
+
+
   const handleSearch = () => {
     if (!values.searchInput) {
       setErrorFlags({ ...errorFlags, searchInput: true });
@@ -93,11 +147,11 @@ function App(props) {
 
   return (
     <CurrentUserContext.Provider value={currentUserValue}>
-
-
       <div className="page">
         <Header
           handleSigninClick={handleSigninClick}
+          handleSignout={handleSignout}
+          isSignedIn={isSignedIn}
         />
         <Main>
           <Switch>
@@ -129,9 +183,10 @@ function App(props) {
             <ProtectedRoute
               path="/saved-news"
               component={SavedNews}
-              isLoggedIn={isLoggedIn}
+              isSignedIn={isSignedIn}
               newsCards={newsCards}
               isVisible={true}
+              authorize={authorize}
             />
             <Route>
               <Redirect to="/" />
