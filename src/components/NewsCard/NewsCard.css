@@ -56,7 +56,10 @@
 .newscard__bookmark:hover ~ .newscard__tooltip {
   display: block;
 }
-.newscard__bookmark_marked {
+.newscard__bookmark_active {
+  stroke: #1A1B22;
+}
+.newscard__bookmark_saved {
   stroke: none;
   fill: #2F71E5;
 }

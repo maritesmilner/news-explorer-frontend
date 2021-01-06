@@ -29,8 +29,7 @@ export default function NewsCardList(props) {
     );
   }
 
-  const cardsForDisplay = props.newsCards.slice(0, props.displayCount);
-
+  const cardsForDisplay = props.displayCount ? props.newsCards.slice(0, props.displayCount) : props.newsCards;
   return (
     <section id="news-card-list">
       <div className="news-card-list">
@@ -41,12 +40,15 @@ export default function NewsCardList(props) {
               <NewsCard
                 card={card}
                 placement={props.placement}
+                isSignedIn={props.isSignedIn}
+                handleBookmark={props.handleBookmark}
+                handleDeleteCard={props.handleDeleteCard}
                 key={i}
               />
             ))
           }
         </ul>
-        {props.newsCards.length > props.displayCount &&
+        {props.displayCount && props.newsCards.length > props.displayCount &&
           <button className="news-card-list__more" type="button" aria-label="show more" onClick={props.handleMore}>
             Show more
           </button>

@@ -29,21 +29,22 @@ function App(props) {
   const [resultCount, setResultCount] = React.useState();
   const [isVisible, setIsVisible] = React.useState(false);
   const [newsCards, setNewsCards] = React.useState([]);
+  const [savedCards, setSavedCards] = React.useState([]);
   const [isApiError, setIsApiError] = React.useState(false);
   const initialDisplayCount = React.useRef(3);
   const [displayCount, setDisplayCount] = React.useState(initialDisplayCount.current);
-  // const isSignedIn = React.useRef(false);
 
   const authorize = () => {
     const token = localStorage.getItem('token');
     if (token) {
-      // we'll verify the token
+      // verify the token
       mainApi.authorize(token)
         .then((res) => {
           console.log(res);
           setCurrentUser(res);
           setIsSignedIn(true);
           props.history.push(props.location.pathname);
+          return;
         })
         .catch((err) => {
           console.log(err);
@@ -51,6 +52,19 @@ function App(props) {
         });
     }
   };
+
+  React.useEffect(() => {
+    isSignedIn &&
+      mainApi.getArticles()
+        .then((res) => {
+          console.log(res.data);
+          setSavedCards(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+          setIsInfoPopupOpen(true);
+        });
+  }, [isSignedIn]);
 
   React.useEffect(() => {
     !isSignedIn && authorize();
@@ -117,6 +131,7 @@ function App(props) {
 
   const handleSignout = () => {
     localStorage.removeItem('token');
+    setIsSignedIn(false);
     props.history.push('/');
   };
 
@@ -144,6 +159,58 @@ function App(props) {
   const handleMore = () => {
     setDisplayCount(displayCount + initialDisplayCount.current)
   };
+  const handleDeleteCard = (card) => {
+    mainApi
+      .deleteArticle(card._id)
+      .then((res) => {
+        console.log(res);
+        card.isSaved = false;
+        const cards = [...newsCards];
+        const foundIndex = cards.findIndex(c => c._id === card._id);
+        cards[foundIndex] = card;
+        setNewsCards(cards);
+        const filteredCards = savedCards.filter(c => c._id !== card._id)
+        setSavedCards(filteredCards);
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsApiError(true);
+      })
+  }
+  const handleBookmark = (card) => {
+    if (isSignedIn) {
+      card.isSaved ?
+        handleDeleteCard(card) :
+        mainApi
+          .saveArticle({
+            keyword: values.searchInput,
+            title: card.title,
+            text: card.description,
+            source: card.source.name,
+            link: card.link,
+            image: card.urlToImage,
+            date: card.publishedAt,
+          })
+          .then((res) => {
+            card._id = res.data._id;
+            card.keyword = values.searchInput;
+            card.isSaved = true;
+            const cards = [...newsCards];
+            const foundIndex = cards.findIndex(c => c.title === card.title);
+            cards[foundIndex] = card;
+            setNewsCards(cards);
+            setSavedCards([card, ...savedCards]);
+          })
+          .catch((err) => {
+            console.log(err);
+            setIsApiError(true);
+          });
+    } else {
+      closeAllPopups();
+      setIsSigninPopupOpen(true);
+    }
+
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUserValue}>
@@ -176,6 +243,8 @@ function App(props) {
                   isVisible={isVisible}
                   isApiError={isApiError}
                   handleMore={handleMore}
+                  isSignedIn={isSignedIn}
+                  handleBookmark={handleBookmark}
                 />
               </SearchForm>
               <About />
@@ -184,9 +253,8 @@ function App(props) {
               path="/saved-news"
               component={SavedNews}
               isSignedIn={isSignedIn}
-              newsCards={newsCards}
-              isVisible={true}
-              authorize={authorize}
+              newsCards={savedCards}
+              handleDeleteCard={handleDeleteCard}
             />
             <Route>
               <Redirect to="/" />

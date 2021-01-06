@@ -7,12 +7,16 @@ export default function SavedNews(props) {
   return (
     <>
       <section id="saved-news-header">
-        <SavedNewsHeader />
+        <SavedNewsHeader
+          cardCount={props.newsCards.length}
+        />
       </section>
       <NewsCardList
-        displayCount="5"
         placement="saved-articles"
         newsCards={props.newsCards}
+        isVisible={true}
+        isSignedIn={props.isSignedIn}
+        handleDeleteCard={props.handleDeleteCard}
       />
     </>
   );
