@@ -37,6 +37,17 @@
   color: #B6BCBF;
 }
 
+.form__error {
+  width: 226px;
+  margin: 16px auto 0;
+  font-family: Inter, Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #FF0000;
+}
+
 .form__footer {
   width: 226px;
   margin: 16px auto 252px auto;

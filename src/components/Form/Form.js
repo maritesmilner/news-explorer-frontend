@@ -37,6 +37,7 @@ export default function Form(props) {
       >
         <h1 className="form__title">{props.title}</h1>
         {props.children}
+        {props.errorFlags.serverError && <p className="form__error">{props.errorFlags.serverError}</p>}
         <button
           type="submit"
           className={isInputError ? `${props.submitButtonClassName} form__submit_disabled` : props.submitButtonClassName}
@@ -46,6 +47,7 @@ export default function Form(props) {
           {props.submitButtonLabel}
         </button>
       </form>
+
       {props.formClassName === "form__search" ? "" :
         <p className="form__footer">
           or <button type="button" className="form__footer-button" onClick={props.handleAltLinkClick}>{props.altLink}</button>

@@ -117,15 +117,16 @@ function App(props) {
   };
 
   const handleSignup = () => {
-    closeAllPopups();
     mainApi.signup({ email: values.email, password: values.password, name: values.name })
       .then((res) => {
+        closeAllPopups();
         setIsInfoPopupOpen(true);
         setIsSignupSuccess(true);
       })
       .catch((err) => {
-        console.log(err);
-        setIsInfoPopupOpen(true);
+        err.then((error) => {
+          setErrorFlags({ ...errorFlags, serverError: error.message });
+        })
       });
   };
 
@@ -163,7 +164,6 @@ function App(props) {
     mainApi
       .deleteArticle(card._id)
       .then((res) => {
-        console.log(res);
         card.isSaved = false;
         const cards = [...newsCards];
         const foundIndex = cards.findIndex(c => c._id === card._id);

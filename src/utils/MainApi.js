@@ -5,7 +5,7 @@ class MainApi {
   }
   _getDataPromise(endpoint) {
     return fetch(`${this._baseUrl}/${endpoint}`, this._options).then((res) => {
-      return res.ok ? res.json() : Promise.reject(`Error: ${res.statusText}`);
+      return res.ok ? res.json() : Promise.reject(res.json());
     });
   }
   authorize(token) {
