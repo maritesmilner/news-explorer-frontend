@@ -5,7 +5,7 @@ import Preloader from "../Preloader/Preloader";
 import NewsCard from "../NewsCard/NewsCard";
 
 export default function NewsCardList(props) {
-  if (!props.isVisible) {
+  if (!props.isVisible && !props.resultCount) {
     return null;
   }
   if (props.isSearching) {

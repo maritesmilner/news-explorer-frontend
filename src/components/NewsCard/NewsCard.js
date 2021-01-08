@@ -34,7 +34,7 @@ export default function NewsCard({ card, handleDeleteCard, placement, handleBook
 
   const months = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"];
-  const cardDate = new Date(card.publishedAt ? card.publishedAt : card.date);
+  const cardDate = new Date(card.date);
   const cardDateString = `${months[cardDate.getMonth()]} ${cardDate.getDate()}, ${cardDate.getFullYear()}`;
   return (
     <li className="newscard">
@@ -43,12 +43,12 @@ export default function NewsCard({ card, handleDeleteCard, placement, handleBook
         {button}
         {toolTipText}
       </div>
-      <img className="newscard__pic" src={card.urlToImage ? card.urlToImage : card.image} alt="article 1" />
+      <img className="newscard__pic" src={card.image} alt="article 1" />
       <div className="newscard__info">
         <p className="newscard__date">{cardDateString}</p>
         <h2 className="newscard__title">{card.title}</h2>
-        <p className="newscard__snippet">{card.description ? card.description : card.text}</p>
-        <h3 className="newscard__source">{card.source.name ? card.source.name : card.source}</h3>
+        <p className="newscard__snippet">{card.text}</p>
+        <h3 className="newscard__source">{card.source}</h3>
       </div>
     </li>
   );

@@ -40,29 +40,42 @@ function App(props) {
       // verify the token
       mainApi.authorize(token)
         .then((res) => {
-          console.log(res);
           setCurrentUser(res);
           setIsSignedIn(true);
           props.history.push(props.location.pathname);
           return;
         })
         .catch((err) => {
-          console.log(err);
-          setIsInfoPopupOpen(true);
+          err.then((error) => {
+            console.log(error.message);
+            setIsApiError(true);
+          })
         });
     }
   };
 
   React.useEffect(() => {
+    const prevSearchResults = JSON.parse(localStorage.getItem('searchResults'));
+    if (prevSearchResults) {
+      setNewsCards(prevSearchResults);
+      setResultCount(prevSearchResults.length)
+    }
+  }, []);
+  React.useEffect(() => {
+    localStorage.setItem("searchResults", JSON.stringify(newsCards));
+  }, [newsCards]);
+
+  React.useEffect(() => {
     isSignedIn &&
       mainApi.getArticles()
         .then((res) => {
-          console.log(res.data);
           setSavedCards(res.data);
         })
         .catch((err) => {
-          console.log(err);
-          setIsInfoPopupOpen(true);
+          err.then((error) => {
+            console.log(error.message);
+            setIsApiError(true);
+          })
         });
   }, [isSignedIn]);
 
@@ -88,6 +101,7 @@ function App(props) {
     }
     setErrorFlags({});
     setValues({});
+    setIsApiError(false);
   };
 
   const handleSigninClick = () => {
@@ -100,19 +114,18 @@ function App(props) {
   };
 
   const handleSignin = () => {
-    closeAllPopups();
     mainApi.signin({ email: values.email, password: values.password })
       .then((res) => {
         if (res.token) {
           localStorage.setItem("token", res.token);
           authorize();
-        } else {
-          setIsInfoPopupOpen(true);
+          closeAllPopups();
         }
       })
       .catch((err) => {
-        console.log(err);
-        setIsInfoPopupOpen(true);
+        err.then((error) => {
+          setErrorFlags({ ...errorFlags, serverError: error.message });
+        })
       });
   };
 
@@ -136,7 +149,6 @@ function App(props) {
     props.history.push('/');
   };
 
-
   const handleSearch = () => {
     if (!values.searchInput) {
       setErrorFlags({ ...errorFlags, searchInput: true });
@@ -146,8 +158,21 @@ function App(props) {
     newsApi
       .getArticles({ query: values.searchInput })
       .then((res) => {
-        setNewsCards(res.articles);
-        setResultCount(res.totalResults);
+        if (res.articles) {
+          const cards = res.articles.map(a => {
+            return {
+              keyword: values.searchInput,
+              title: a.title,
+              text: a.description,
+              source: a.source.name,
+              link: a.link,
+              image: a.urlToImage,
+              date: a.publishedAt,
+            }
+          })
+          setNewsCards(cards);
+          setResultCount(res.totalResults);
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -173,27 +198,20 @@ function App(props) {
         setSavedCards(filteredCards);
       })
       .catch((err) => {
-        console.log(err);
-        setIsApiError(true);
-      })
+        err.then((error) => {
+          console.log(error.message);
+          setIsApiError(true);
+        })
+      });
   }
   const handleBookmark = (card) => {
     if (isSignedIn) {
       card.isSaved ?
         handleDeleteCard(card) :
         mainApi
-          .saveArticle({
-            keyword: values.searchInput,
-            title: card.title,
-            text: card.description,
-            source: card.source.name,
-            link: card.link,
-            image: card.urlToImage,
-            date: card.publishedAt,
-          })
+          .saveArticle(card)
           .then((res) => {
             card._id = res.data._id;
-            card.keyword = values.searchInput;
             card.isSaved = true;
             const cards = [...newsCards];
             const foundIndex = cards.findIndex(c => c.title === card.title);
@@ -202,8 +220,10 @@ function App(props) {
             setSavedCards([card, ...savedCards]);
           })
           .catch((err) => {
-            console.log(err);
-            setIsApiError(true);
+            err.then((error) => {
+              console.log(error.message);
+              setIsApiError(true);
+            })
           });
     } else {
       closeAllPopups();
@@ -255,6 +275,7 @@ function App(props) {
               isSignedIn={isSignedIn}
               newsCards={savedCards}
               handleDeleteCard={handleDeleteCard}
+              keywordsToDisplay="3"
             />
             <Route>
               <Redirect to="/" />

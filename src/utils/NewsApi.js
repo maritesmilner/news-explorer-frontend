@@ -14,5 +14,5 @@ class NewsApi {
   }
 }
 
-const newsApi = new NewsApi("https://newsapi.org/v2/everything", "dfa4a65001354fab869f2be0f08e9217");
+const newsApi = new NewsApi("https://nomoreparties.co/news/v2/everything", "dfa4a65001354fab869f2be0f08e9217");
 export default newsApi;
