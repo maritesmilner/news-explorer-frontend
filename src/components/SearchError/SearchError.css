@@ -1,4 +1,4 @@
-.not-found {
+.search-error {
   width: 100%;
   background: #F5F6F7;
   display: flex;
@@ -6,7 +6,7 @@
   align-items: center;
   padding: 86px 0;
 }
-.not-found__title {
+.search-error__title {
   width: 356px;
   font-family: Roboto Slab, Helvetica, Arial, sans-serif;
   font-weight: normal;
@@ -15,7 +15,7 @@
   text-align: center;
   color: #1A1B22;
 }
-.not-found__text {
+.search-error__text {
   width: 356px;
   font-family: Roboto, Helvetica, Arial, sans-serif;
   font-weight: normal;

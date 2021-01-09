@@ -1,10 +1,10 @@
-import "./NotFound.css";
+import "./SearchError.css";
 
-export default function NotFound() {
+export default function SearchError(props) {
 
   return (
-    <section id="not-found">
-      <div className="not-found">
+    <section id="search-error">
+      <div className="search-error">
         <svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="43" cy="43" r="36.5" stroke="#D1D2D6" />
           <path d="M69 69L88.5 88.5" stroke="#D1D2D6" />
@@ -12,9 +12,8 @@ export default function NotFound() {
           <circle cx="55.5" cy="33.5" r="1.5" fill="#D1D2D6" />
           <circle cx="30.5" cy="33.5" r="1.5" fill="#D1D2D6" />
         </svg>
-        <h1 className="not-found__title">Nothing Found</h1>
-        <p className="not-found__text">Sorry, but nothing matched
-your search terms.</p>
+        <h1 className="search-error__title">{props.title}</h1>
+        <p className="search-error__text">{props.message}</p>
       </div>
     </section>
   );

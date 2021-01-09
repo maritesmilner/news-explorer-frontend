@@ -16,6 +16,8 @@ function Header(props) {
       <p className={`header__logo ${logoPlacement}`}>NewsExplorer</p>
       <Navigation
         handleSigninClick={props.handleSigninClick}
+        handleSignout={props.handleSignout}
+        isSignedIn={props.isSignedIn}
       />
     </header>
   );

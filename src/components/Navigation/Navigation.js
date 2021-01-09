@@ -1,11 +1,10 @@
 import React from "react";
 import { NavLink, withRouter } from "react-router-dom";
-// import CurrentUserContext from "../../contexts/CurrentUserContext.js";
+import CurrentUserContext from "../../contexts/CurrentUserContext.js";
 import "./Navigation.css";
 
 function Navigation(props) {
-  //for stage-3
-  // const { currentUser } = React.useContext(CurrentUserContext);
+  const { currentUser } = React.useContext(CurrentUserContext);
   const [windowSize, setWindowSize] = React.useState(window.innerWidth);
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = React.useState(false);
 
@@ -16,13 +15,17 @@ function Navigation(props) {
     isBurgerMenuOpen ? setIsBurgerMenuOpen(false) : setIsBurgerMenuOpen(true);
   };
 
-  const handleSignout = () => {
+  const closeBurgerMenu = () => {
     isBurgerMenuOpen && toggleBurgerMenu();
-    //proceed to signout
+  }
+
+  const handleSignout = () => {
+    closeBurgerMenu();
+    props.handleSignout();
   }
 
   const handleSignin = () => {
-    isBurgerMenuOpen && toggleBurgerMenu();
+    closeBurgerMenu();
     props.handleSigninClick();
   }
 
@@ -33,25 +36,39 @@ function Navigation(props) {
   let menuItemPlacement = "";
   let saveArticles = "";
   let button = "";
+  let buttonClass = "";
   let burgerMenuPlacement = "";
   let headerMenuColPlacement = "";
   let closeButtonPlacement = "";
   if (props.location.pathname === "/saved-news") {
-    menuItemPlacement = "header__menu-item_placement_saved-articles";
+    buttonClass = menuItemPlacement = "header__menu-item_placement_saved-articles";
     headerMenuColPlacement = "header__menu-col_placement_saved-articles";
     burgerMenuPlacement = "header__burger-menu_placement_saved-articles";
     closeButtonPlacement = "header__close_placement__saved-articles";
     saveArticles = <li className="header__menu-item">
-      <NavLink className={`header__menu-item_news ${menuItemPlacement}`} activeClassName="header_menu-item_selected " to="/saved-news">Saved articles</NavLink>
+      <NavLink className={`header__menu-item_news ${menuItemPlacement}`}
+        activeClassName="header_menu-item_selected "
+        to="/saved-news"
+        onClick={closeBurgerMenu}>Saved articles</NavLink>
     </li>;
-    button = <button className={`header__menu-item_signout ${menuItemPlacement}`} type="button" aria-label="sign out" onClick={handleSignout}>
-      Elise <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path fillRule="evenodd" clipRule="evenodd" d="M10 6L6 6L6 18H10V20H6C4.89543 20 4 19.1046 4 18V6C4 4.89543 4.89543 4 6 4H10V6ZM17.5856 13L13.2927 17.1339L14.707 18.4958L21.4141 12.0371L14.707 5.57837L13.2927 6.9402L17.5856 11.0741H8V13H17.5856Z" fill="#1A1B22" />
-      </svg>
-    </button>
   } else {
-    button = <button className={`header__menu-item_signin ${menuItemPlacement}`} type="button" aria-label="sign in" onClick={handleSignin}>Sign in</button>
+    props.isSignedIn ? buttonClass = "header__menu-item_signout_home" : buttonClass = "";
+    saveArticles = <li className="header__menu-item">
+      <NavLink className={"header__menu-item_news"}
+        activeClassName="header_menu-item_selected "
+        to="/saved-news"
+        onClick={closeBurgerMenu}>Saved articles</NavLink>
+    </li>;
   }
+
+  props.isSignedIn ?
+    button = <button className={`header__menu-item_signout ${buttonClass}`} type="button" aria-label="sign out" onClick={handleSignout}>
+      {currentUser.name} <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path fillRule="evenodd" clipRule="evenodd" d="M10 6L6 6L6 18H10V20H6C4.89543 20 4 19.1046 4 18V6C4 4.89543 4.89543 4 6 4H10V6ZM17.5856 13L13.2927 17.1339L14.707 18.4958L21.4141 12.0371L14.707 5.57837L13.2927 6.9402L17.5856 11.0741H8V13H17.5856Z" />
+      </svg>
+    </button> :
+    button = <button className={`header__menu-item_signin ${buttonClass}`} type="button" aria-label="sign in" onClick={handleSignin}>Sign in</button>;
+
 
   let navClassName = "header__menu";
   if (windowSize < 768 && isBurgerMenuOpen) {
@@ -80,9 +97,11 @@ function Navigation(props) {
     <nav>
       <ul className={navClassName}>
         <li className="header__menu-item">
-          <NavLink className={`header__menu-item_home ${menuItemPlacement}`} activeClassName="header_menu-item_selected " to="/" exact>Home</NavLink>
+          <NavLink className={`header__menu-item_home ${menuItemPlacement}`}
+            activeClassName="header_menu-item_selected "
+            to="/" exact onClick={closeBurgerMenu}>Home</NavLink>
         </li>
-        {saveArticles}
+        {props.isSignedIn && saveArticles}
         <li className="header__menu-item">
           {button}
         </li>

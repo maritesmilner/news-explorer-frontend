@@ -27,7 +27,7 @@ export default function Input(props) {
   };
 
 
-  const errorSpan = <span className="form__input-error-msg">{errorMsg.current}</span>;
+  const errorSpan = <span className="form__input-error-msg">{props.errorMessage ? props.errorMessage : errorMsg.current}</span>;
 
   return (
     <label className="form__input-label">
@@ -42,6 +42,7 @@ export default function Input(props) {
         required={props.isRequired}
         value={props.value || ""}
         onChange={validateChange}
+        disabled={props.isDisabled}
       />
       {props.isError && errorSpan}
     </label>
