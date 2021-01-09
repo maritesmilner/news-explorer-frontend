@@ -6,7 +6,7 @@ import "./SavedNews.css";
 export default function SavedNews(props) {
   const [sortedKeywords, setSortedKeywords] = React.useState([]);
   React.useEffect(() => {
-    if (props.newsCards.length > 0) {
+    if (props.newsCards && props.newsCards.length > 0) {
       let keywords = [];
       //extract keywords
       props.newsCards.forEach(e => {
@@ -32,11 +32,13 @@ export default function SavedNews(props) {
       setSortedKeywords(keywordNumbers.map(k => k[0]));
     }
   }, [props.newsCards]);
+
+  const cardCount = props.newsCards && props.newsCards.length;
   return (
     <>
       <section id="saved-news-header">
         <SavedNewsHeader
-          cardCount={props.newsCards.length}
+          cardCount={cardCount}
           sortedKeywords={sortedKeywords}
           keywordsToDisplay={props.keywordsToDisplay}
         />
@@ -44,7 +46,7 @@ export default function SavedNews(props) {
       <NewsCardList
         placement="saved-articles"
         newsCards={props.newsCards}
-        isVisible={true}
+        isVisible={cardCount > 0 && true}
         isSignedIn={props.isSignedIn}
         handleDeleteCard={props.handleDeleteCard}
       />

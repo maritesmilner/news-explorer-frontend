@@ -14,6 +14,7 @@ import About from "../About/About";
 import AuthForm from "../AuthForm/AuthForm";
 import Popup from "../Popup/Popup";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import { SEARCH_RESULT_INITIAL_DISP_COUNT } from "../../utils/Constants";
 
 function App(props) {
   const [currentUser, setCurrentUser] = React.useState({});
@@ -26,12 +27,13 @@ function App(props) {
   const [isSignupSuccess, setIsSignupSuccess] = React.useState(false);
   const [isSignedIn, setIsSignedIn] = React.useState(false);
   const [isSearching, setIsSearching] = React.useState(false);
-  const [resultCount, setResultCount] = React.useState();
+  const [resultCount, setResultCount] = React.useState(0);
   const [isVisible, setIsVisible] = React.useState(false);
   const [newsCards, setNewsCards] = React.useState([]);
   const [savedCards, setSavedCards] = React.useState([]);
   const [isApiError, setIsApiError] = React.useState(false);
-  const initialDisplayCount = React.useRef(3);
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const initialDisplayCount = React.useRef(SEARCH_RESULT_INITIAL_DISP_COUNT);
   const [displayCount, setDisplayCount] = React.useState(initialDisplayCount.current);
 
   const authorize = () => {
@@ -58,18 +60,25 @@ function App(props) {
     const prevSearchResults = JSON.parse(localStorage.getItem('searchResults'));
     if (prevSearchResults) {
       setNewsCards(prevSearchResults);
-      setResultCount(prevSearchResults.length)
+      setResultCount(prevSearchResults.length);
+      prevSearchResults.length > 0 && setIsVisible(true);
+      return;
     }
+    setIsVisible(false);
   }, []);
+
   React.useEffect(() => {
     localStorage.setItem("searchResults", JSON.stringify(newsCards));
   }, [newsCards]);
 
   React.useEffect(() => {
     isSignedIn &&
-      mainApi.getArticles()
+      mainApi.getArticles(currentUser._id)
         .then((res) => {
-          setSavedCards(res.data);
+          if (res.data) {
+            setSavedCards(res.data);
+            return;
+          }
         })
         .catch((err) => {
           err.then((error) => {
@@ -77,7 +86,7 @@ function App(props) {
             setIsApiError(true);
           })
         });
-  }, [isSignedIn]);
+  }, [isSignedIn, currentUser]);
 
   React.useEffect(() => {
     !isSignedIn && authorize();
@@ -114,13 +123,15 @@ function App(props) {
   };
 
   const handleSignin = () => {
-    mainApi.signin({ email: values.email, password: values.password })
+    setIsSubmitting(true);
+    mainApi.signIn({ email: values.email, password: values.password })
       .then((res) => {
         if (res.token) {
           localStorage.setItem("token", res.token);
           authorize();
           closeAllPopups();
         }
+        setIsSubmitting(false);
       })
       .catch((err) => {
         err.then((error) => {
@@ -130,11 +141,13 @@ function App(props) {
   };
 
   const handleSignup = () => {
-    mainApi.signup({ email: values.email, password: values.password, name: values.name })
+    setIsSubmitting(true);
+    mainApi.signUp({ email: values.email, password: values.password, name: values.name })
       .then((res) => {
         closeAllPopups();
         setIsInfoPopupOpen(true);
         setIsSignupSuccess(true);
+        setIsSubmitting(false);
       })
       .catch((err) => {
         err.then((error) => {
@@ -154,6 +167,7 @@ function App(props) {
       setErrorFlags({ ...errorFlags, searchInput: true });
       return;
     }
+    setIsSubmitting(true);
     setIsSearching(true);
     newsApi
       .getArticles({ query: values.searchInput })
@@ -173,14 +187,15 @@ function App(props) {
           setNewsCards(cards);
           setResultCount(res.totalResults);
         }
+        setIsSearching(false);
+        setIsSubmitting(false);
+        setIsVisible(true);
       })
       .catch((err) => {
         console.log(err);
+        setIsSearching(false);
         setIsApiError(true);
       });
-    setTimeout(function () { setIsSearching(false) }, 250);
-    setIsVisible(true);
-    setDisplayCount(initialDisplayCount.current);
   }
   const handleMore = () => {
     setDisplayCount(displayCount + initialDisplayCount.current)
@@ -189,6 +204,7 @@ function App(props) {
     mainApi
       .deleteArticle(card._id)
       .then((res) => {
+        console.log(card);
         card.isSaved = false;
         const cards = [...newsCards];
         const foundIndex = cards.findIndex(c => c._id === card._id);
@@ -226,8 +242,7 @@ function App(props) {
             })
           });
     } else {
-      closeAllPopups();
-      setIsSigninPopupOpen(true);
+      handleSigninClick();
     }
 
   }
@@ -251,8 +266,8 @@ function App(props) {
                 formClassName="form__search"
                 submitButtonLabel="Search"
                 submitButtonClassName="form__search-submit"
-                isSubmitButtonEnabled={true}
                 isSearching={isSearching}
+                isSubmitting={isSubmitting}
               >
                 <NewsCardList
                   title="Search results"
@@ -276,6 +291,8 @@ function App(props) {
               newsCards={savedCards}
               handleDeleteCard={handleDeleteCard}
               keywordsToDisplay="3"
+              handleSignin={handleSigninClick}
+              handleClose={closeAllPopups}
             />
             <Route>
               <Redirect to="/" />
@@ -293,6 +310,7 @@ function App(props) {
             handleAltLinkClick={handleSignupClick}
             handleSubmit={handleSignin}
             submitButtonClassName="form__submit"
+            isSubmitting={isSubmitting}
           />
           <AuthForm
             isOpen={isSignupPopupOpen}
@@ -307,6 +325,7 @@ function App(props) {
             handleSubmit={handleSignup}
             submitButtonClassName="form__submit"
             isSignup={true}
+            isSubmitting={isSubmitting}
           />
           <Popup
             isOpen={isInfoPopupOpen}

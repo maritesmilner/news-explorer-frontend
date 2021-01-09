@@ -5,7 +5,7 @@ import Preloader from "../Preloader/Preloader";
 import NewsCard from "../NewsCard/NewsCard";
 
 export default function NewsCardList(props) {
-  if (!props.isVisible && !props.resultCount) {
+  if (!props.isVisible) {
     return null;
   }
   if (props.isSearching) {
@@ -36,7 +36,7 @@ export default function NewsCardList(props) {
         {props.title && <h1 className="news-card-list__title">Search results</h1>}
         <ul className="news-card-list__cards">
           {
-            cardsForDisplay.map((card, i) => (
+            cardsForDisplay && cardsForDisplay.map((card, i) => (
               <NewsCard
                 card={card}
                 placement={props.placement}

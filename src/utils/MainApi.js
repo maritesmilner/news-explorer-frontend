@@ -1,3 +1,5 @@
+import { MAIN_API_BASE_URL } from "../utils/Constants";
+
 class MainApi {
   constructor(baseUrl, options) {
     this._baseUrl = baseUrl;
@@ -29,7 +31,7 @@ class MainApi {
     });
     return this._getDataPromise("articles");
   }
-  signup({ email, password, name }) {
+  signUp({ email, password, name }) {
     this._options.method = "POST";
     this._options.body = JSON.stringify({
       email,
@@ -38,7 +40,7 @@ class MainApi {
     });
     return this._getDataPromise("signup");
   }
-  signin({ email, password }) {
+  signIn({ email, password }) {
     this._options.method = "POST";
     this._options.body = JSON.stringify({
       email,
@@ -47,17 +49,11 @@ class MainApi {
     return this._getDataPromise("signin");
 
   }
-  signout() {
-    this._options.method = "POST";
-    return fetch(`${this._baseUrl}/signout`, this._options).then((res) => {
-      return res.ok ? res : Promise.reject(`Error: ${res.statusText}`);
-    });
-  }
-  getArticles() {
+  getArticles(userId) {
     const { body, ...rest } = this._options
     rest.method = "GET";
     this._options = rest;
-    return this._getDataPromise("articles");
+    return this._getDataPromise(`articles/${userId}`);
   }
   deleteArticle(id) {
     this._options.method = "DELETE";
@@ -65,7 +61,7 @@ class MainApi {
   }
 }
 
-const mainApi = new MainApi("https://newspin.students.nomoreparties.site/api", {
+const mainApi = new MainApi(MAIN_API_BASE_URL, {
   headers: {
     "Content-Type": "application/json",
   },

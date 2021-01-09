@@ -16,6 +16,7 @@ export default function WithForm(WrappedComponent) {
         formClassName={props.formClassName}
         submitButtonClassName={props.submitButtonClassName}
         isSubmitButtonEnabled={props.isSubmitButtonEnabled}
+        isSubmitting={props.isSubmitting}
       >
         {props.children}
       </Form>

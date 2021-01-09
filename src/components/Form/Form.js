@@ -2,26 +2,25 @@ import React from "react";
 import "./Form.css"
 
 export default function Form(props) {
-  const [isInputError, setIsInputError] = React.useState(true);
-  const children = props.children;
+  const [disableSubmit, setDisableSubmit] = React.useState(true);
 
   React.useEffect(() => {
-    if (props.isSubmitButtonEnabled) {
-      setIsInputError(false);
+    if (props.isSubmitting) {
+      setDisableSubmit(true);
       return;
     }
     if (props.errorFlags && Object.keys(props.errorFlags).length > 0) {
       const flagsArr = Object.keys(props.errorFlags);
-      const hasEmpty = React.Children.toArray(children).some((child) =>
+      const hasEmpty = React.Children.toArray(props.children).some((child) =>
         child.props.value ? false : true
       );
       hasEmpty
-        ? setIsInputError(true)
-        : setIsInputError(flagsArr.some((k) => props.errorFlags[k] === true));
+        ? setDisableSubmit(true)
+        : setDisableSubmit(flagsArr.some((k) => props.errorFlags[k] === true));
     } else {
-      setIsInputError(true);
+      setDisableSubmit(true);
     }
-  }, [props.errorFlags, children, props.isSubmitButtonEnabled]);
+  }, [props.errorFlags, props.children, props.isSubmitting]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -40,8 +39,8 @@ export default function Form(props) {
         {props.errorFlags.serverError && <p className="form__error">{props.errorFlags.serverError}</p>}
         <button
           type="submit"
-          className={isInputError ? `${props.submitButtonClassName} form__submit_disabled` : props.submitButtonClassName}
-          disabled={isInputError}
+          className={disableSubmit ? `${props.submitButtonClassName} form__submit_disabled` : props.submitButtonClassName}
+          disabled={disableSubmit}
           onClick={handleSubmit}
         >
           {props.submitButtonLabel}

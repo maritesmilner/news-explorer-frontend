@@ -29,6 +29,7 @@ export default function SearchForm(props) {
           isError={props.errorFlags.searchInput}
           isRequired={true}
           errorMessage="Please enter a keyword"
+          isDisabled={props.isSubmitting}
         />
       </SearchWithForm>
       {props.children}

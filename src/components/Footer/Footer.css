@@ -119,11 +119,3 @@
     margin-left: 42px;
   }
 }
-.footer__social-button {
-  width: 20px;
-  border: none;
-  margin: 0;
-  padding: 0;
-  background-color: transparent;
-  cursor: pointer;
-}

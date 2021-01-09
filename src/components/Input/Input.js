@@ -42,6 +42,7 @@ export default function Input(props) {
         required={props.isRequired}
         value={props.value || ""}
         onChange={validateChange}
+        disabled={props.isDisabled}
       />
       {props.isError && errorSpan}
     </label>
